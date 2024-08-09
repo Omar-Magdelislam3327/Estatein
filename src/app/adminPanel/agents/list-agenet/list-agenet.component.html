@@ -1,0 +1,28 @@
+<app-admin-nav></app-admin-nav>
+<div class="container p-3 mt-4" @fadeInOut>
+  <div class="row">
+    <div class="col-12">
+      <div class="box p-4 d-flex justify-content-between align-items-center flex-wrap">
+        <h4>Agent Card View</h4>
+        <button routerLink="/admin/agents/add" class="btn btn-outline-purble">Add Agent</button>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-12 mt-5" *ngFor="let agent of agent">
+      <div class="box p-4">
+        <div class="upper d-flex justify-content-start gap-3 align-items-center flex-wrap">
+          <img width="70" class="rounded" [src]="agent.image" alt="">
+          <h5>{{agent.name}}</h5>
+        </div>
+        <div class="rest mt-4">
+          <p>Email : <span class="fw-bold"> {{agent.email}}</span></p>
+          <hr>
+          <p>Phone : <span class="fw-bold"> {{agent.phone}}</span></p>
+          <hr>
+          <p>Location : <span class="fw-bold"> {{agent.location}}</span></p>
+          <hr>
+          <button class="btn btn-purble">Write Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

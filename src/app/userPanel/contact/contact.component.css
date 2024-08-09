@@ -1,0 +1,68 @@
+h2{
+  color: var(--white90);
+}
+.contact{
+  background-color: var(--grey15);
+  border: none;
+  border-radius: 10px;
+  transition: 0.4s;
+  .icons i{
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    line-height: 70px;
+    font-size: 32px;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+}
+
+.contact:hover{
+  transform: translateY(-3px);
+}
+.contact:hover .icons i{
+  background-color: var(--grey10);
+}
+.txt{
+  h6{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+  }
+}
+.section2{
+  .row{
+      border: 1px solid var(--grey15);
+      border-radius: 10px;
+  }
+  .form-label{
+      color: white;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+  .form-control{
+      background: #191919;
+      border: 1px solid var(--grey15);
+      border-radius: 7px;
+      color: var(--grey50);
+      box-shadow: none;
+      padding: 10px;
+  }
+  .form-control::placeholder{
+      color: var(--grey60);
+  }
+  .form-select{
+      background: #191919;
+      border: 1px solid var(--grey15);
+      border-radius: 7px;
+      color: var(--grey50);
+      box-shadow: none;
+      padding: 10px;
+  }
+  select option:hover{
+      background-color: var(--purble60) !important;
+      color: yellow !important;
+  }
+}

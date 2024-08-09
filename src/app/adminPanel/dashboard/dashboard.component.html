@@ -1,0 +1,144 @@
+<app-admin-nav></app-admin-nav>
+<div class="main" @fadeInOut>
+  <section class="section1 p-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row flex-column">
+            <div class="col-lg-12">
+              <div class="boxed d-flex justify-content-between align-items-center flex-wrap">
+                <img src=" assets/vendors/imgs/download.svg" alt="">
+                <div class="txt">
+                  <h4>Total Properties</h4>
+                  <div class="progress" role="progressbar" aria-label="white example" aria-valuenow="75"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-white" style="width: 75%"></div>
+                  </div>
+                  <p class="text-white">431 more to break last month record</p>
+                </div>
+                <h4>4,562</h4>
+              </div>
+            </div>
+
+            <div class="col-12 mt-5">
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="box property-card p-3">
+                    <div class="card-body">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-body me-3">
+                          <h2>2,356</h2>
+                          <p class="property-p mb-0">Properties for Sale</p>
+                          <span class="text-white-50">Target 3k/month</span>
+                        </div>
+                        <div class="d-inline-block position-relative donut-chart-sale">
+                          <div class="svg-container">
+                            <svg class="peity" height="90" width="90">
+                              <path
+                                d="M 45 0 A 45 45 0 1 1 13.180194846605364 76.81980515339464 L 18.129942314911197 71.87005768508881 A 38 38 0 1 0 45 7"
+                                data-value="5" fill="rgb(60, 76, 184)"></path>
+                              <path
+                                d="M 13.180194846605364 76.81980515339464 A 45 45 0 0 1 44.99999999999999 0 L 44.99999999999999 7 A 38 38 0 0 0 18.129942314911197 71.87005768508881"
+                                data-value="3" fill="rgba(236, 236, 236, 1)"></path>
+                            </svg>
+                            <div class="centered-text">
+                              <span>71%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="box property-card p-3">
+                    <div class="card-body">
+                      <div class="media d-flex align-items-center">
+                        <div class="media-body me-3">
+                          <h2>2,206</h2>
+                          <p class="property-p mb-0">Properties for Rent</p>
+                          <span class="text-white-50">Target 3k/month</span>
+                        </div>
+                        <div class="d-inline-block position-relative donut-chart-sale">
+                          <div class="svg-container">
+                            <svg class="peity" height="90" width="90">
+                              <path
+                                d="M 45 0 A 45 45 0 1 1 13.180194846605353 13.180194846605364 L 18.129942314911187 18.129942314911197 A 38 38 0 1 0 45 7"
+                                data-value="7" fill="rgb(55, 209, 90)"></path>
+                              <path
+                                d="M 13.180194846605353 13.180194846605364 A 45 45 0 0 1 44.99999999999999 0 L 44.99999999999999 7 A 38 38 0 0 0 18.129942314911187 18.129942314911197"
+                                data-value="1" fill="rgba(236, 236, 236, 1)"></path>
+                            </svg>
+                            <div class="centered-text green">
+                              <span>90%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 ">
+          <div class="card">
+            <app-bar></app-bar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section2 p-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <div class="card">
+            <app-line></app-line>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <div class="row ">
+            <div class="col-lg-12">
+              <div class="row flex-column">
+                <div class="col-lg-12">
+                  <div class="box">
+                    <app-pie></app-pie>
+                  </div>
+                </div>
+                <div class="col-lg-12 mt-4">
+                  <div class="boxing">
+                    <div class="viewed">
+                      <div class="txt d-flex justify-content-between align-items-center flex-wrap">
+                        <p>Property Viewed</p>
+                        <p class="text-white-50">561/days</p>
+                      </div>
+                      <div class="progress" role="progressbar" aria-label="Warning example" aria-valuenow="75"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-warning" style="width: 65%"></div>
+                      </div>
+                      <div class="txt mt-3 d-flex justify-content-between align-items-center flex-wrap">
+                        <p>Property Listed</p>
+                        <p class="text-white-50">3,456 Unit</p>
+                      </div>
+                      <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-info" style="width: 90%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,71 @@
+img{
+  transition: 0.4s;
+}
+.about:hover img{
+  transform: rotateY(180deg);
+}
+.section3{
+  .boxe{
+    transition: 0.3s;
+  }
+  .boxe:hover{
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+  }
+}
+.team {
+  h4{
+    color: #EED26E;
+  }
+  & .carde {
+    position: relative;
+    transition: 0.3s;
+    background-color: var(--grey15);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+
+    & img {
+      background-color: transparent !important;
+      height: 100% !important;
+      width: 100%;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    & .team-info {
+      padding: 1rem;
+    }
+
+    & .social {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: 0.4s;
+
+      & i {
+        background-color: white;
+        color: var(--primary);
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      & i:hover {
+        background-color: #EED26E;
+      }
+    }
+  }
+
+  & .carde:hover .social {
+    opacity: 1;
+  }
+}

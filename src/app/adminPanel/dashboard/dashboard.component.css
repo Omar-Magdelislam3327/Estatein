@@ -1,0 +1,118 @@
+.boxed{
+  background-color: #FF6746;
+  padding: 1.575rem;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  h4{
+    font-size: 2.188rem !important;
+    line-height: 1.5;
+    color: white;
+    font-weight: 700;
+  }
+}
+.boxedp{
+  background-color: var(--purble60);
+  padding: 1.575rem;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  h4{
+    font-size: 2.188rem !important;
+    line-height: 1.5;
+    color: white;
+    font-weight: 700;
+  }
+}
+.boxed::after{
+    position: absolute;
+    content: "";
+    bottom: 0rem;
+    right: 0rem;
+    background-image: url(../../../assets/vendors/imgs/home.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+.box{
+  background-color: var(--grey15);
+  border: none;
+  border-radius: 10px;
+}
+.boxing{
+  background-color: var(--grey15);
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+}
+.chart{
+  /* background-color: var(--grey15); */
+  height: 330px !important;
+  overflow: hidden;
+}
+.chart > div {
+  height: 100% !important;
+}
+.padd{
+  padding: 1.875rem;
+  border: none;
+  border-radius: 10px;
+  .shakl{
+    .num{
+      background-color: rgb(219,222,243);
+      padding: 20px;
+      border-radius: 100%;
+    }
+  }
+}
+.svg-container {
+  position: relative;
+  display: inline-block;
+}
+
+.svg-container svg {
+  display: block;
+}
+
+.centered-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #dbdef3;
+  color: #3C4CB8;
+  border-radius: 50%;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.green{
+  background-color: #D5F5DC !important;
+  color: rgb( 55, 209, 89) !important;
+}
+.box{
+  h2{
+    color: white;
+    font-weight: 600;
+    font-size: 1.75rem !important;
+    line-height: 1.4;
+  }
+  p{
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  span{
+    font-size: 0.813rem !important;
+    line-height: 1.4;
+  }
+}

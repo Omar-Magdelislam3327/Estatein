@@ -1,0 +1,63 @@
+.section2{
+  .box{
+    transition: 0.4s;
+  }
+  .box:hover{
+    background-color: var(--grey20);
+    transform: translateY(-5px);
+  }
+}
+.section3{
+  .box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .box .head {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden; /* Ensure that zoomed image does not overflow */
+    transition: transform 0.5s;
+  }
+
+  .box .img-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .box .img-wrapper img {
+    transition: transform 0.5s ease;
+  }
+
+  .box .head::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 10%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0.5) 100%
+    );
+    transition: left 0.5s ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .box:hover .head::before {
+    left: 105%;
+  }
+
+  .box:hover .img-wrapper img {
+    transform: scale(1.15);
+  }
+
+
+}

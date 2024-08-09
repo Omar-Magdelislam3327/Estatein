@@ -1,0 +1,38 @@
+<app-admin-nav></app-admin-nav>
+<main class="mt-4" @fadeInOut>
+  <div class="container py-5">
+    <div class="text-light">
+      <div class="table-responsive">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th>Order Id</th>
+              <th>Order Property Id</th>
+              <th>Order Property Name</th>
+              <th>Order User Name</th>
+              <th>Order User Email</th>
+              <th>Order Date</th>
+              <th>Statues</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td>{{ order.id }}</td>
+              <td>{{ order.propertyId }}</td>
+              <td>{{ order.propertyName }}</td>
+              <td>{{ order.userName }}</td>
+              <td>{{ order.userEmail }}</td>
+              <td>{{ order.date }}</td>
+              <td>{{ order.status }}</td>
+              <!-- <td>
+                <button (click)="remove(prop.id)" class="btn btn-danger">
+                  Sold
+                </button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

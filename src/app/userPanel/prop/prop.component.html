@@ -1,0 +1,187 @@
+<app-nav></app-nav>
+<main id="prop" @fadeInOut>
+  <section class="section1 p-5">
+    <div class="container">
+      <h1>Find your Dream property</h1>
+      <p>Welcome to Estatein, where your dream property awaits in every corner of our beautiful world. Explore
+        our curated selection of properties, each offering a unique story and a chance to redefine your
+        life. With categories to suit every dreamer, your journey </p>
+    </div>
+  </section>
+
+  <form (ngSubmit)="searchProperties()" #propertyForm="ngForm">
+    <section class="section2 p-5">
+      <div class="container">
+        <div class="row ">
+          <div class="col-lg-3 col-md-6 col-12 mt-3">
+            <div class="input-group mb-3">
+              <select class="form-select shadow-none" [(ngModel)]="filters.location" name="location">
+                <option value="" selected disabled>Select Location</option>
+                <option value="Ezbet Elnakhl">Ezbet Elnakhl, Cairo</option>
+                <option value="Badr City">Badr City, Cairo</option>
+                <option value="Elshorouk City">Elshorouk City, Cairo</option>
+                <option value="Future City">Future City, Cairo</option>
+                <option value="New Capital">New Capital, Cairo</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 mt-3">
+            <div class="input-group mb-3">
+              <select class="form-select shadow-none" [(ngModel)]="filters.propertyType" name="propertyType">
+                <option value="" selected disabled>Property Type</option>
+                <option value="Villa">Villa</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Condominium">Condominium</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Penthouse">Penthouse</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 mt-3">
+            <div class="input-group mb-3">
+              <select class="form-select shadow-none" [(ngModel)]="filters.priceRange" name="priceRange">
+                <option value="" selected disabled>Pricing Range</option>
+                <option value="800000-999000">800,000 - 999,000</option>
+                <option value="1000000-1199000">1,000,000 - 1,199,000</option>
+                <option value="1200000-1499000">1,200,000 - 1,499,000</option>
+                <option value="1500000-2000000">1,500,000 - 2,000,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 mt-3">
+            <div class="input-group mb-3">
+              <select class="form-select shadow-none" [(ngModel)]="filters.size" name="size">
+                <option value="" selected disabled>Property Size</option>
+                <option value="90-100">90 - 100</option>
+                <option value="100-110">100 - 110</option>
+                <option value="110-120">110 - 120</option>
+                <option value="120-130">120 - 130</option>
+                <option value="130-140">130 - 140</option>
+                <option value="130-140">140 - 150</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-center mb-3 mt-3">
+              <button class="btn-purble" type="submit">Find Property</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+
+  <section class="section3 p-5">
+    <div class="container">
+      <div class="title">
+        <img src="assets/vendors/imgs/stars.png" alt="">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="txt">
+            <h2>Featured Properties</h2>
+            <p>Explore the following categories to find the perfect property that resonates with your vision of home</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-3" *ngFor="let prop of filteredProperties">
+          <div class="box p-3 m-auto">
+            <div class="head">
+              <div class="img-wrapper text-center">
+                <img src="{{prop.head}}" class="img-fluid" alt="">
+              </div>
+            </div>
+            <h4 class="mt-2 text-white">{{prop.name}}</h4>
+            <div class="lower mt-4">
+              <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <div class="price">
+                  <p class="m-0 p-0">Price:</p>
+                  <h5 class="text-white m-0 p-0">${{prop.price}}</h5>
+                </div>
+                <button routerLink="/properties/{{prop.id}}" class="btn-purble">View Property Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section4 p-5">
+    <div class="container">
+      <div class="title">
+        <img src="assets/vendors/imgs/stars.png" alt="">
+        <h2 class="fs-1 text-white">Let's Make it Happen</h2>
+        <p>Ready to take the first step toward your dream property? Fill out the form below, and our real
+          estate wizards will work their magic to find your perfect match. Don't wait; let's embark on
+          this exciting journey together.</p>
+      </div>
+      <div class="row p-3">
+        <div class="col-lg-3">
+          <label for="fname" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
+        </div>
+        <div class="col-lg-3">
+          <label for="lname" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
+        </div>
+        <div class="col-lg-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter Your email">
+        </div>
+        <div class="col-lg-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="number" class="form-control" id="phone" placeholder="Enter Your Phone">
+        </div>
+        <div class="col-lg-3">
+          <label for="loc" class="form-label">Prefared Location</label>
+          <select name="loc" id="loc" class="form-select">
+            <option disabled selected>Select Location</option>
+            <option value="1">New York</option>
+            <option value="2">Los Angeles</option>
+            <option value="3">Chicago</option>
+          </select>
+        </div>
+        <div class="col-lg-3">
+          <label for="type" class="form-label">Property Type</label>
+          <select name="type" id="type" class="form-select">
+            <option disabled selected>Select Property Type</option>
+            <option value="1">Villa</option>
+            <option value="2">Apartment</option>
+            <option value="3">Condominium</option>
+            <option value="4">Townhouse</option>
+            <option value="5">Penthouse</option>
+          </select>
+        </div>
+        <div class="col-lg-3">
+          <label for="num1" class="form-label">No. of Bathrooms</label>
+          <select name="num1" id="num1" class="form-select">
+            <option disabled selected>Select No. of Bathrooms</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div class="col-lg-3">
+          <label for="num2" class="form-label">No. of Bedrooms</label>
+          <select name="num2" id="num2" class="form-select">
+            <option disabled selected>Select No. of Bedrooms</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div class="col-lg-12">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="" cols="20" rows="7"></textarea>
+        </div>
+        <div class="btns mt-3 text-end">
+          <button class="btn-purble">Send Your Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,49 @@
+<!-- <div class="container p-5">
+  <div class="title">
+    <h2>Welcome Back to Estatein!</h2>
+    <p>Sign in your account</p>
+  </div>
+  <div class="row">
+    <label for="" class="form-label">Email</label>
+    <input type="text" name="email" id="email" class="form-control" placeholder="Enter Your Email" #email="ngModel"
+      [(ngModel)]="user.email">
+    <label for="" class="form-label">Password</label>
+    <input type="password" name="pass" id="pass" class="form-control" placeholder="Enter Your Password" #pass="ngModel"
+      [(ngModel)]="user.password">
+    <div class="d-flex justify-content-between flex-wrap">
+      <div class="lft d-flex justify-content-between align-items-center">
+        <input type="checkbox" class="form-check m-0 p-0">
+        <label class=" ms-3 p-0" for="">Remember Me</label>
+      </div>
+      <a href="">forgot password?</a>
+    </div>
+    <button class="btn-purble w-100 mt-4" (click)="submit()">Login</button>
+  </div>
+</div> -->
+<div id="login" class="container">
+  <div class="row">
+    <div class="txt col-12 ">
+      <div class="form p-2">
+        <div class="title">
+          <h2 class="my-3">Welcome Back</h2>
+        </div>
+        <div class="format">
+          <div class="form__group field">
+            <input name="email" id="email" class="form-control" placeholder="Enter Your Email" #email="ngModel"
+              [(ngModel)]="user.email" type="text" class="form__field" placeholder="Email" required>
+            <label for="Email" class="form__label">Email or Phone Number</label>
+          </div>
+          <div class="form__group field mt-3">
+            <input name="pass" id="pass" class="form-control" placeholder="Enter Your Password" #pass="ngModel"
+              [(ngModel)]="user.password" type="password" class="form__field" placeholder="password" required>
+            <label for="password" class="form__label">Password</label>
+          </div>
+          <div class="btn-login mt-5 d-flex gap-5 align-items-center">
+            <button (click)="submit()" type="submit" class="btn-purble">Login</button>
+            <a class="text-white" href="">Forget Password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

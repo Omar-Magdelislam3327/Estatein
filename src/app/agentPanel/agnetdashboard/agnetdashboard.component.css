@@ -1,0 +1,20 @@
+section{
+  text-align: center;
+}
+.container{
+  background-color: var(--grey10);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  .list , .add{
+    padding: 20px;
+    background-color: var(--grey20);
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    transition: 0.4s;
+  }
+  .list:hover , .add:hover{
+    background-color: var(--grey30);
+    
+  }
+}

@@ -1,0 +1,26 @@
+.form-label{
+  color: var(--purble60);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.form-control{
+  background: transparent;
+  border: 1px solid var(--grey15);
+  border-radius: 7px;
+  color: var(--grey50);
+  box-shadow: none !important;
+}
+.form-control::placeholder{
+  color: var(--grey60);
+}
+.btn-purble{
+  border: none;
+  font-weight: bold;
+}
+h2{
+  color: var(--purble60);
+}
+p{
+  font-weight: bold;
+}

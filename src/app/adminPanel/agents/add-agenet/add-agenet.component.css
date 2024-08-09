@@ -1,0 +1,16 @@
+.card{
+  background-color: var(--grey10);
+  .form-control {
+    background-color: var(--grey15);
+    color: var(--grey50);
+    border: none;
+  }
+  .form-select{
+    background-color: var(--grey15);
+    border: none;
+    color: var(--grey50);
+  }
+  .form-control::placeholder{
+    color: var(--grey60);
+  }
+}

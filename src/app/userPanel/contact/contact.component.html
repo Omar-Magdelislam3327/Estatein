@@ -1,0 +1,105 @@
+<app-nav></app-nav>
+<div class="main" @fadeInOut>
+  <section class="section1 p-5">
+    <div class="container">
+      <div class="title text-center">
+        <p>Get In Touch</p>
+        <h2 class="fs-1">Our Contact Information</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 mt-3">
+          <div class="contact d-flex justify-content-start align-items-center gap-3 flex-wrap p-3">
+            <div class="icons">
+              <i class="fa-solid fa-location-dot fs-1 text-white"></i>
+            </div>
+            <div class="txt">
+              <h6 class="">Our Address</h6>
+              <p class="m-0">7th Abo Fathy ST, Cairo, Egypt</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12 mt-3">
+          <div class="contact d-flex justify-content-start align-items-center gap-3 flex-wrap p-3">
+            <div class="icons">
+              <i class="fa-solid fa-phone fs-1 text-white"></i>
+            </div>
+            <div class="txt">
+              <h6 class="">Phone Number</h6>
+              <p class="m-0">+20 1060 587 068</p>
+              <!-- <p class="m-0">+20 1501 883 344</p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-12 mt-3">
+          <div class="contact d-flex justify-content-start align-items-center gap-3 flex-wrap p-3">
+            <div class="icons">
+              <i class="fa-regular fa-envelope fs-1 text-white"></i>
+            </div>
+            <div class="txt">
+              <h6 class="">Email Address</h6>
+              <p class="m-0">omagd206&#64;gmail.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section2 p-5">
+    <div class="container">
+      <div class="title">
+        <img src="assets/vendors/imgs/stars.png" alt="">
+        <h2 class="fs-1 text-white">Let's Make it Happen</h2>
+        <p>Ready to take the first step toward your dream property? Fill out the form below, and our real
+          estate wizards will work their magic to find your perfect match. Don't wait; let's embark on
+          this exciting journey together.</p>
+      </div>
+      <div class="row p-3">
+        <div class="col-lg-4 col-md-6 col-12">
+          <label for="fname" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <label for="lname" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter Your email">
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="number" class="form-control" id="phone" placeholder="Enter Your Phone">
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <label for="loc" class="form-label">Inquiry Type</label>
+          <select name="loc" id="loc" class="form-select">
+            <option disabled selected>Select type</option>
+            <option value="1">Villa</option>
+            <option value="2">Apartment</option>
+            <option value="3">Condominium</option>
+            <option value="4">Townhouse</option>
+            <option value="5">Penthouse</option>
+          </select>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <label for="type" class="form-label">How did you hear about us?</label>
+          <select name="type" id="type" class="form-select">
+            <option disabled selected>Select</option>
+            <option value="1">Facebook</option>
+            <option value="1">Twitter</option>
+            <option value="1">Instagram</option>
+            <option value="1">Relevant</option>
+          </select>
+        </div>
+        <div class="col-lg-12">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="" cols="20" rows="7"></textarea>
+        </div>
+        <div class="btns mt-3 text-end">
+          <button class="btn-purble">Send Your Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,250 @@
+<app-nav></app-nav>
+<div class="main" @fadeInOut>
+  <section class="section1 p-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 mt-lg-0 mt-3 order-lg-1 order-2">
+          <div class="hero-text">
+            <h1>Discover Your Dream Property with estatein</h1>
+            <p>Your journey to finding the perfect property begins here. Explore our listings to find the
+              home that matches your dreams.</p>
+            <div class="btns ">
+              <button class=" btn-darker me-2 mt-3">Learn More</button>
+              <button class=" btn-purble mt-3" routerLink="/properties">Browse Properties</button>
+            </div>
+            <div class="boxes row gap-3 m-auto justify-content-lg-start justify-content-center text-center mt-5">
+              <div class="boxe mt-lg-0 mt-3">
+                <h4 class="m-0 p-0">200+</h4>
+                <p class="m-0 p-0">Happy Customers</p>
+              </div>
+              <div class="boxe mt-lg-0 mt-3">
+                <h4 class="m-0">10K+</h4>
+                <p class="m-0">Properties for clients</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-1 ">
+          <div class="hero-image">
+            <div class="image"></div>
+            <img src="assets/vendors/imgs/hero.png" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section2 p-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 cpl-sm-12">
+          <div class="box mb-lg-0 mb-3">
+            <div class="box-icon">
+              <img src="assets/vendors/imgs/Union.png" class="fa" alt="">
+              <img src="assets/vendors/imgs/Icon Container.png" class="img-fluid img-container " alt="">
+            </div>
+            <p class="pt-3">Find your Dream Home</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 cpl-sm-12">
+          <div class="box mb-lg-0 mb-3">
+            <div class="box-icon">
+              <img src="assets/vendors/imgs/money.png" class="fa" alt="">
+              <img src="assets/vendors/imgs/Icon Container.png" class="img-fluid img-container" alt="">
+            </div>
+            <p class="pt-3">Unlock Property Value</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 cpl-sm-12">
+          <div class="box mb-lg-0 mb-3">
+            <div class="box-icon">
+              <img src="assets/vendors/imgs/property.png" class="fa" alt="">
+              <img src="assets/vendors/imgs/Icon Container.png" class="img-fluid img-container" alt="">
+            </div>
+            <p class="pt-3">Property Management</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 cpl-sm-12">
+          <div class="box mb-lg-0 mb-3">
+            <div class="box-icon">
+              <img src="assets/vendors/imgs/sun.png" class="fa" alt="">
+              <img src="assets/vendors/imgs/Icon Container.png" class="img-fluid img-container" alt="">
+            </div>
+            <p class="pt-3">Smart Investments</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section3 p-5">
+    <div class="container">
+      <div class="title">
+        <img src="assets/vendors/imgs/stars.png" alt="">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+          <div class="txt">
+            <h2>Featured Properties</h2>
+            <p>Explore our handpicked selection of featured properties. Each listing offers a glimpse
+              into
+              exceptional<br> homes and investments available through Estatein. Click "View Details" for
+              more
+              information.</p>
+          </div>
+          <div class="btns">
+            <button class="btn-purble" routerLink="/properties">View All Properties</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-3" *ngFor="let prop of prop let i = index">
+          <div class="box p-3 m-auto" *ngIf="i<3">
+            <div class="shiny-effect"></div>
+            <div class="head">
+              <div class="img-wrapper text-center">
+                <img src="{{prop.head}}" class="img-fluid" alt="">
+              </div>
+            </div>
+            <h4 class="mt-2 text-white">{{prop.name}}</h4>
+            <div class="lower mt-4">
+              <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <div class="price">
+                  <p class="m-0 p-0">Price:</p>
+                  <h5 class="text-white m-0 p-0">${{prop.price}}</h5>
+                </div>
+                <button routerLink="/properties/{{prop.id}}" class="btn-purble">View Property Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section class="section4 p-5">
+    <div class="container">
+      <div class="title">
+        <img src="assets/vendors/imgs/stars.png" alt="">
+        <h2 class="text-white">Frequently Asked Questions</h2>
+        <p>Find answers to common questions about Estatein's services, property listings, and the real
+          estate process. We're here to provide clarity and assist you every step of the way.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item gradient-border mt-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <div class="txt d-flex align-items-center">
+                    <div class="number">
+                      <h6 class="num p-3 m-0 me-3">01</h6>
+                    </div>
+                    How do I search for properties on Estatein?
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Learn how to use our user-friendly search tools to find properties that match your criteria.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item gradient-border mt-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <div class="txt d-flex align-items-center">
+                    <div class="number">
+                      <h6 class="num p-3 m-0 me-3">02</h6>
+                    </div>
+                    What documents do I need to sell my property through Estatein?
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Find out about the necessary documentation for listing your property with us.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item gradient-border mt-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <div class="txt d-flex align-items-center">
+                    <div class="number">
+                      <h6 class="num p-3 m-0 me-3">03</h6>
+                    </div>
+                    How can I contact an Estatein agent?
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Discover the different ways you can get in touch with our experienced agents.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item gradient-border mt-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  <div class="txt d-flex align-items-center">
+                    <div class="number">
+                      <h6 class="num p-3 m-0 me-3">04</h6>
+                    </div>
+                    What is the process for buying a property?
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Search listings, schedule viewings, make an offer, secure financing, and close the deal.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item gradient-border mt-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  <div class="txt d-flex align-items-center">
+                    <div class="number">
+                      <h6 class="num p-3 m-0 me-3">05</h6>
+                    </div>
+                    How do I list my property on your website?
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Create an account, submit property details, and publish your listing.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item gradient-border mt-3">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseSex" aria-expanded="false" aria-controls="collapseSex">
+                  <div class="txt d-flex align-items-center">
+                    <div class="number">
+                      <h6 class="num p-3 m-0 me-3">06</h6>
+                    </div>
+                    What are the fees for using your service?
+                  </div>
+                </button>
+              </h2>
+              <div id="collapseSex" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Our service fees vary; please contact us for specific pricing details.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

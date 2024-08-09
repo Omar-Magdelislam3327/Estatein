@@ -1,0 +1,19 @@
+.box{
+  background-color: var(--grey15);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  h4{
+    color: var(--purble60);
+  }
+  span{
+    font-size: 18px;
+    color: var(--purble70);
+  }
+  .btn-purble {
+    padding: 0.375rem 0.75rem;
+  }
+  .btn-outline-purble {
+    padding: 0.475rem 0.65rem;
+  }
+}

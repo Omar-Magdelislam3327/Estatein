@@ -1,0 +1,272 @@
+{
+  "properties": [
+    {
+      "agent": [
+        {
+          "id": 2,
+          "name": "AB Property",
+          "phone": "0123456789",
+          "email": "abproperty@gmail.com",
+          "image": "assets\\vendors\\imgs\\agent.png",
+          "location": "Cairo, Egypt"
+        }
+      ],
+      "name": "Metropolitan Haven",
+      "price": "1,500,000",
+      "location": "Ezbet Elnakhl, Cairo",
+      "head": "assets/vendors/imgs/estate1.png",
+      "image1": "assets/vendors/imgs/apart.png",
+      "image2": "assets/vendors/imgs/apart1.png",
+      "image3": "assets/vendors/imgs/apart2.png",
+      "type": "Apartment",
+      "bathNum": 3,
+      "bedNum": 3,
+      "area": 122,
+      "description": "deeded",
+      "id": 1,
+      "purpose": "For Sale",
+      "parking": "Yes",
+      "wifi": "Yes",
+      "elevator": "Yes"
+    },
+    {
+      "agent": [
+        {
+          "name": "CD Property",
+          "phone": "010101010101",
+          "email": "cdproperty@gmail.com",
+          "image": "assets\\vendors\\imgs\\agent.png",
+          "location": "Alexandria, Egypt",
+          "id": 4
+        }
+      ],
+      "name": "Villa Archetype",
+      "price": "1,500,000",
+      "location": "Badr City, Cairo",
+      "head": "assets/vendors/imgs/estate2.png",
+      "image1": "assets/vendors/imgs/apart.png",
+      "image2": "assets/vendors/imgs/apart1.png",
+      "image3": "assets/vendors/imgs/apart2.png",
+      "type": "Villa",
+      "bathNum": 3,
+      "bedNum": 3,
+      "area": 150,
+      "description": "d",
+      "id": 2,
+      "purpose": "For Rent",
+      "parking": "Yes",
+      "wifi": "Yes",
+      "elevator": "Yes"
+    },
+    {
+      "agent": [
+        {
+          "name": "CD Property",
+          "phone": "0123456789",
+          "email": "cdproperty@gmail.com",
+          "image": "assets\\vendors\\imgs\\agent.png",
+          "location": "Ismailya, Egypt",
+          "id": 4
+        }
+      ],
+      "name": "Fashe5a Gedan",
+      "price": "1,100,000",
+      "location": "New Capital, Cairo",
+      "head": "assets/vendors/imgs/estate.png",
+      "image1": "assets/vendors/imgs/apart.png",
+      "image2": "assets/vendors/imgs/apart1.png",
+      "image3": "assets/vendors/imgs/apart2.png",
+      "type": "Townhouse",
+      "bathNum": 3,
+      "bedNum": 3,
+      "area": 112,
+      "description": "deeded",
+      "id": 3,
+      "purpose": "For Sale",
+      "parking": "Yes",
+      "wifi": "Yes",
+      "elevator": "Yes"
+    },
+    {
+      "agent": [
+        {
+          "id": 5,
+          "name": "YZ Property",
+          "phone": "010101010101",
+          "email": "yzproperty@gmail.com",
+          "image": "assets\\vendors\\imgs\\agent.png",
+          "location": "Qena, Egypt"
+        }
+      ],
+      "name": "7elwa Awy",
+      "price": "800,000",
+      "location": "Elshorouk City , Cairo",
+      "head": "assets/vendors/imgs/estate1.png",
+      "image1": "assets/vendors/imgs/apart.png",
+      "image2": "assets/vendors/imgs/apart1.png",
+      "image3": "assets/vendors/imgs/apart2.png",
+      "type": "Apartment",
+      "bathNum": 3,
+      "area": 120,
+      "bedNum": 2,
+      "purpose": "For Sale",
+      "parking": "Yes",
+      "elevator": "Yes",
+      "wifi": "Yes",
+      "description": "vr",
+      "id": 4
+    },
+    {
+      "agent": [
+        {
+          "id": 6,
+          "name": "EF Property",
+          "phone": "0111789412",
+          "email": "efproperty@gmail.com",
+          "image": "assets/vendors/imgs/agent.png",
+          "location": "Matrouh , Egypt"
+        }
+      ],
+      "name": "UUUF",
+      "price": "1,200,000",
+      "head": "assets/vendors/imgs/estate1.png",
+      "image1": "assets/vendors/imgs/apart.png",
+      "image2": "assets/vendors/imgs/apart1.png",
+      "image3": "assets/vendors/imgs/apart2.png",
+      "type": "Townhouse",
+      "bathNum": 3,
+      "bedNum": 3,
+      "area": 150,
+      "purpose": "For Sale",
+      "parking": "Yes",
+      "elevator": "Yes",
+      "wifi": "Yes",
+      "description": "ddd",
+      "id": 5
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "image": "assets\\vendors\\imgs\\user.png",
+      "name": "Omar Magd",
+      "email": "omarmagd@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "phone": "0123456789",
+      "location": "Cairo, Egypt"
+    },
+    {
+      "id": 2,
+      "image": "assets\\vendors\\imgs\\agent.png",
+      "name": "AB Property",
+      "email": "abproperty@gmail.com",
+      "password": "123456",
+      "role": "agent",
+      "phone": "0123456789",
+      "location": "Cairo, Egypt"
+    },
+    {
+      "id": 3,
+      "image": "assets\\vendors\\imgs\\user.png",
+      "name": "Ahmed Mahfouz",
+      "email": "ahmedmahfouz@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "favorites": [],
+      "phone": "0123456789",
+      "location": "Cairo, Egypt"
+    },
+    {
+      "id": 4,
+      "image": "assets\\vendors\\imgs\\agent.png",
+      "name": "CD Property",
+      "email": "cdproperty@gmail.com",
+      "password": "123456",
+      "role": "agent",
+      "phone": "010101010101",
+      "location": "Alexandria, Egypt"
+    },
+    {
+      "id": 5,
+      "image": "assets\\vendors\\imgs\\agent.png",
+      "name": "YZ Property",
+      "email": "yzproperty@gmail.com",
+      "password": "123456",
+      "role": "agent",
+      "phone": "010101010101",
+      "location": "Qena, Egypt"
+    },
+    {
+      "favorites": [],
+      "propertiesAdded": [],
+      "name": "EF Property",
+      "location": "Matrouh , Egypt",
+      "phone": "0111789412",
+      "email": "efproperty@gmail.com",
+      "password": "123456",
+      "image": "assets/vendors/imgs/agent.png",
+      "role": "agent",
+      "id": 6
+    },
+    {
+      "favorites": [
+        3
+      ],
+      "propertiesAdded": [],
+      "appointment": [],
+      "name": "Ziad Abdelsattar",
+      "email": "ziad@gmail.com",
+      "password": "123456",
+      "image": "assets/vendors/imgs/user.png",
+      "role": "user",
+      "id": 7,
+      "phone": "01514876248",
+      "location": "Ismailya, Egypt"
+    },
+    {
+      "favorites": [
+        1
+      ],
+      "propertiesAdded": [],
+      "appointment": [],
+      "name": "Fady Emad",
+      "phone": "01201201012",
+      "location": "Cairo , Egypt",
+      "email": "fadyemad@gmail.com",
+      "password": "123456",
+      "image": "assets/vendors/imgs/user.png",
+      "role": "user",
+      "id": 8
+    }
+  ],
+  "orders": [
+    {
+      "userEmail": "ahmedmahfouz@gmail.com",
+      "userName": "Ahmed Mahfouz",
+      "propertyId": 2,
+      "propertyName": "Villa Archetype",
+      "date": "2024-08-08T10:19:42.446Z",
+      "status": "Pending",
+      "id": 1
+    },
+    {
+      "userEmail": "ziad@gmail.com",
+      "userName": "Ziad Abdelsattar",
+      "propertyId": 3,
+      "propertyName": "Fashe5a Gedan",
+      "date": "2024-08-08T10:47:28.052Z",
+      "status": "Pending",
+      "id": 2
+    },
+    {
+      "userEmail": "fadyemad@gmail.com",
+      "userName": "Fady Emad",
+      "propertyId": 1,
+      "propertyName": "Metropolitan Haven",
+      "date": "2024-08-09T01:21:28.409Z",
+      "status": "Pending",
+      "id": 3
+    }
+  ]
+}

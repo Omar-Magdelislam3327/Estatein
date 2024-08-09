@@ -1,0 +1,35 @@
+<app-admin-nav></app-admin-nav>
+<main class="mt-4" @fadeInOut>
+  <div class="container py-5">
+    <div class="text-light">
+      <div class="table-responsive">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th>Property Name</th>
+              <th>Property Image</th>
+              <th>Property Type</th>
+              <th>Property Purpose</th>
+              <th>Property Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prop of prop">
+              <td>{{ prop.name }}</td>
+              <td><img width="120" [src]="prop.head" alt="error"></td>
+              <td>{{ prop.type }}</td>
+              <td>{{ prop.purpose }}</td>
+              <td>{{ prop.price }}$</td>
+              <td>
+                <button (click)="remove(prop.id)" class="btn btn-danger">
+                  Sold
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

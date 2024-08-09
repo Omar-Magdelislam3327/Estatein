@@ -1,0 +1,74 @@
+
+.lft {
+  background-color: #222;
+  border-radius: 10px;
+}
+
+.lft .user-info {
+  margin-top: 20px;
+}
+.imag img{
+  /* background-color: #333; */
+
+}
+.rit {
+  background-color: #222;
+  border-radius: 10px;
+  border: none;
+}
+.nav-tabs{
+  background-color: #333;
+  width: auto;
+  margin-left: auto;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.nav-tabs .nav-link {
+  font-size: 20px;
+  color: #bbb;
+  border: none;
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff;
+  color: var(--purble60);
+  background-color: transparent;
+  border: none;
+}
+
+.tab-content {
+  /* background-color: #333; */
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+
+}
+.user-info :where(.fa-regular , .fa-solid){
+  background-color: var(--grey20);
+  color: var(--purble60);
+  padding: 10px;
+  width: 45px;
+  border: none;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.user-info :where(.fa-regular , .fa-solid):hover{
+  background-color: var(--grey30);
+}
+.tab-content .title h4{
+  position: relative;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+.tab-content .title h4::before{
+  content: "";
+  position: absolute;
+  background-color: var(--purble60);
+  width: 10%;
+  height: 4px;
+  bottom: 0;
+  border-radius: 10px;
+}
