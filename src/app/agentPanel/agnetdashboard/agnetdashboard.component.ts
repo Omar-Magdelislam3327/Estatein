@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertiesapiService } from '../../services/propertiesapi.service';
-import { ActivatedRoute, Router , RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { AgentNavComponent } from '../../userPanel/shared/agent-nav/agent-nav.component';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
@@ -8,7 +8,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 @Component({
   selector: 'app-agnetdashboard',
   standalone: true,
-  imports: [NgFor  , RouterLink , AgentNavComponent],
+  imports: [NgFor, RouterLink, AgentNavComponent],
   templateUrl: './agnetdashboard.component.html',
   styleUrls: ['./agnetdashboard.component.css'],
   animations: [
@@ -24,10 +24,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class AgnetdashboardComponent {
-  constructor(private router : Router){
-    let loggedIn = JSON.parse(localStorage.getItem("agent") || "false");
-    if(!loggedIn){
-      this.router.navigateByUrl('/home')
-    }
+  constructor(private router: Router) {
+
   }
 }

@@ -1,40 +1,43 @@
 import { Component } from '@angular/core';
-import { UsersapiService } from '../../services/usersapi.service';
 import { User } from '../../modules/User';
-import { Router } from '@angular/router';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  user: User = new User();
-  constructor(private api: UsersapiService, private router: Router, private authService: AuthService) {}
+  loginForm!: FormGroup;
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
-  submit() {
-    this.api.get().subscribe((data: any) => {
-      let foundUser = data.find((user: any) => {
-        return user.email === this.user.email && user.password === this.user.password;
-      });
-      if (foundUser) {
-        if (foundUser.role === "user") {
-          localStorage.setItem("user", JSON.stringify({ id: foundUser.id, role: foundUser.role , favorites:foundUser.favorites }));
-          this.router.navigate(['/home']);
-        } else if (foundUser.role === "agent") {
-          this.router.navigate(['/agent/dashboard']);
-          localStorage.setItem("agent",JSON.stringify({ id: foundUser.id, name: foundUser.name, role: foundUser.role , email:foundUser.email , phone : foundUser.phone , location : foundUser.location , image:foundUser.image }))
-        } else if (foundUser.role === "admin") {
-          this.router.navigate(['/admin/dashboard']);
-          localStorage.setItem("admin","true")
+  login() {
+    if (this.loginForm.invalid) return;
+
+    const { email, password } = this.loginForm.value;
+
+    this.authService.login(email, password).subscribe({
+      next: (response) => {
+        if (response && response.token) {
+          this.authService.saveUserData(response);
+          this.authService.redirectToDashboard();
+        } else {
+          console.error('Invalid response format:', response);
         }
-      } else {
-        alert("Invalid Credentials");
+      },
+      error: (error) => {
+        console.error('Login error:', error);
       }
     });
   }
+
 }

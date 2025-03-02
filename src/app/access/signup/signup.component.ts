@@ -3,34 +3,47 @@ import { UsersapiService } from '../../services/usersapi.service';
 import { User } from '../../modules/User';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
+  ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnDestroy {
-  user = new User();
-  subscription: Subscription;
-
-  constructor(private api: UsersapiService, private router: Router) {
-    this.subscription = this.api.get().subscribe((data: any) => {
-      console.log(data);
+  subscription!: Subscription;
+  signupForm!: FormGroup
+  constructor(private api: UsersapiService, private router: Router, private fb: FormBuilder) {
+    this.signupForm = this.fb.group({
+      userName: ['', [Validators.required, Validators.minLength(3)]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      city: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  submit() {
-    if (this.user) {
-      this.user.image = "assets/vendors/imgs/user.png";
-      this.user.role = "user";
-      this.api.post(this.user).subscribe((data: any) => {
-        console.log(data);
-        this.router.navigateByUrl("");
-      }, (error: any) => {
-        console.error(error);
-      });
+  submit(): void {
+    if (this.signupForm.valid) {
+      const userData = this.signupForm.value;
+
+      this.subscription = this.api.post(userData).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      this.signupForm.markAllAsTouched();
     }
   }
 

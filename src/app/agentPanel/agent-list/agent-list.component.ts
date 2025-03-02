@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { Properties } from '../../modules/Properties';
 import { AgentNavComponent } from '../../userPanel/shared/agent-nav/agent-nav.component';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { AgentapiserviceService } from '../../services/agentapiservice.service';
 
 @Component({
   selector: 'app-agent-list',
@@ -27,39 +28,28 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class AgentListComponent {
-  id!: any;
-  props: Properties[] = [];
+  props: any[] = [];
   agent!: Agent;
-  prope: Properties[] = [];
+  agentId!: any;
 
   constructor(
     private api: PropertiesapiService,
     private activ: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private agentAPI: AgentapiserviceService
   ) {
-    const loggedInAgent = JSON.parse(localStorage.getItem("agent") || "false");
-    if (!loggedInAgent) {
-      this.router.navigate(['/']);
-    } else {
-      this.agent = loggedInAgent;
-    }
 
-    this.id = this.activ.snapshot.params["id"];
-    this.api.get().subscribe((data: Properties[]) => {
-      console.log("All properties data:", data);
-      this.prope = data.filter((property: Properties) =>
-        property.agent.some((agent: Agent) => {
-          console.log(`Property agent ID: ${agent.id}, Logged-in agent ID: ${this.agent.id}`);
-          return agent.id === this.agent.id;
-        })
-      );
-      console.log("Filtered properties:", this.prope);
+    this.agentId = localStorage.getItem('agentId');
+    this.getProps();
+  }
+  getProps() {
+    this.agentAPI.getPropetiesByAgentId(this.agentId).subscribe((data: any) => {
+      this.props = data;
     });
   }
-
-  remove(id: number) {
-    this.api.delete(id).subscribe(() => {
-      this.prope = this.prope.filter((property: Properties) => property.id !== id);
+  makeSold(id: number) {
+    this.api.makePropertySold(id).subscribe((data: any) => {
+      this.getProps();
     });
   }
 }

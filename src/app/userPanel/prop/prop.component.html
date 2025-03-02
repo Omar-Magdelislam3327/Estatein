@@ -3,31 +3,27 @@
   <section class="section1 p-5">
     <div class="container">
       <h1>Find your Dream property</h1>
-      <p>Welcome to Estatein, where your dream property awaits in every corner of our beautiful world. Explore
+      <p>Welcome to Mogasoft, where your dream property awaits in every corner of our beautiful world. Explore
         our curated selection of properties, each offering a unique story and a chance to redefine your
         life. With categories to suit every dreamer, your journey </p>
     </div>
   </section>
 
-  <form (ngSubmit)="searchProperties()" #propertyForm="ngForm">
+  <form>
     <section class="section2 p-5">
       <div class="container">
         <div class="row ">
           <div class="col-lg-3 col-md-6 col-12 mt-3">
             <div class="input-group mb-3">
-              <select class="form-select shadow-none" [(ngModel)]="filters.location" name="location">
+              <select class="form-select shadow-none" name="location" [(ngModel)]="selectedLocation" name="location">
                 <option value="" selected disabled>Select Location</option>
-                <option value="Ezbet Elnakhl">Ezbet Elnakhl, Cairo</option>
-                <option value="Badr City">Badr City, Cairo</option>
-                <option value="Elshorouk City">Elshorouk City, Cairo</option>
-                <option value="Future City">Future City, Cairo</option>
-                <option value="New Capital">New Capital, Cairo</option>
+                <option value="{{location.name}}" *ngFor="let location of locations">{{location.name}}</option>
               </select>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12 mt-3">
             <div class="input-group mb-3">
-              <select class="form-select shadow-none" [(ngModel)]="filters.propertyType" name="propertyType">
+              <select class="form-select shadow-none" [(ngModel)]="selectedType" name="propertyType">
                 <option value="" selected disabled>Property Type</option>
                 <option value="Villa">Villa</option>
                 <option value="Apartment">Apartment</option>
@@ -39,31 +35,32 @@
           </div>
           <div class="col-lg-3 col-md-6 col-12 mt-3">
             <div class="input-group mb-3">
-              <select class="form-select shadow-none" [(ngModel)]="filters.priceRange" name="priceRange">
+              <select class="form-select shadow-none" [(ngModel)]="selectedPriceRange" name="priceRange">
                 <option value="" selected disabled>Pricing Range</option>
                 <option value="800000-999000">800,000 - 999,000</option>
                 <option value="1000000-1199000">1,000,000 - 1,199,000</option>
                 <option value="1200000-1499000">1,200,000 - 1,499,000</option>
-                <option value="1500000-2000000">1,500,000 - 2,000,000</option>
+                <option value="1500000-1405588112">1,500,000 - 2,000,000</option>
               </select>
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12 mt-3">
             <div class="input-group mb-3">
-              <select class="form-select shadow-none" [(ngModel)]="filters.size" name="size">
+              <select class="form-select shadow-none" [(ngModel)]="selectedSize" name="propertySize">
                 <option value="" selected disabled>Property Size</option>
                 <option value="90-100">90 - 100</option>
                 <option value="100-110">100 - 110</option>
                 <option value="110-120">110 - 120</option>
                 <option value="120-130">120 - 130</option>
                 <option value="130-140">130 - 140</option>
-                <option value="130-140">140 - 150</option>
+                <option value="140-150">140 - 150</option>
               </select>
             </div>
           </div>
           <div class="col-12">
             <div class="text-center mb-3 mt-3">
-              <button class="btn-purble" type="submit">Find Property</button>
+              <button class="btn-purble col-2 mx-1" type="button" (click)="filterProperties()">Find Property</button>
+              <button class="btn-darker col-2 mx-1" type="button" (click)="clearFilter()">Reset</button>
             </div>
           </div>
         </div>
@@ -83,11 +80,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 mt-3" *ngFor="let prop of filteredProperties">
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-3"
+          *ngFor="let prop of filteredProperties | paginate : { id: 'paginate', itemsPerPage: pageSize, currentPage: currentPage, totalItems: total }">
           <div class="box p-3 m-auto">
             <div class="head">
               <div class="img-wrapper text-center">
-                <img src="{{prop.head}}" class="img-fluid" alt="">
+                <img [src]="'http://mogarealstate.runasp.net' + prop?.headImage" class="d-block w-100" alt="...">
               </div>
             </div>
             <h4 class="mt-2 text-white">{{prop.name}}</h4>
@@ -99,6 +97,17 @@
                 </div>
                 <button routerLink="/properties/{{prop.id}}" class="btn-purble">View Property Details</button>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12" *ngIf="showPagination">
+          <div *ngIf="properties.length > 0"
+            class="pagination-container my-0 px-3 py-2 d-flex justify-content-center align-items-center">
+            <div class="my-pagination">
+              <pagination-controls id="paginate" (pageChange)="pageChanged($event)" [maxSize]="12"
+                [directionLinks]="false" [autoHide]="true" [directionLinks]="true" [responsive]="true" previousLabel=""
+                nextLabel="">
+              </pagination-controls>
             </div>
           </div>
         </div>

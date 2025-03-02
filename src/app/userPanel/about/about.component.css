@@ -1,22 +1,27 @@
-img{
+img {
   transition: 0.4s;
 }
-.about:hover img{
+
+.about:hover img {
   transform: rotateY(180deg);
 }
-.section3{
-  .boxe{
+
+.section3 {
+  .boxe {
     transition: 0.3s;
   }
-  .boxe:hover{
+
+  .boxe:hover {
     box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.12);
-      transform: translateY(-2px);
+    transform: translateY(-2px);
   }
 }
+
 .team {
-  h4{
+  h4 {
     color: #EED26E;
   }
+
   & .carde {
     position: relative;
     transition: 0.3s;

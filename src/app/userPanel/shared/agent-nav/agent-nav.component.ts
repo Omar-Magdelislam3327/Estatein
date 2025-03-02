@@ -12,7 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class AgentNavComponent {
   constructor(private router: Router) { }
-  logout(){
-    localStorage.removeItem("agent");
+  logout() {
+    localStorage.clear();
   }
 }

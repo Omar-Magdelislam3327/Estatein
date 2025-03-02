@@ -7,7 +7,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [NavComponent , FooterComponent],
+  imports: [NavComponent, FooterComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css',
   animations: [
@@ -23,15 +23,10 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class AboutComponent {
-  constructor(private router:Router){
-    let loggedIn = JSON.parse(localStorage.getItem("user") || "null");
-    let loggedAgentIn = JSON.parse(localStorage.getItem("agent") || "null");
-    let loggedAdminIn = JSON.parse(localStorage.getItem("admin") || "null");
-    if(!loggedIn && !loggedAgentIn && !loggedAdminIn){
-      this.router.navigate(['/']);
-    }
+  constructor(private router: Router) {
+
   }
-  ngOnInit(){
+  ngOnInit() {
     window.scrollTo(0, 0);
   }
 }

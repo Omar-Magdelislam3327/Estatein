@@ -1,40 +1,42 @@
 <div id="login" class="container">
   <div class="row">
-    <div class="txt col-12 ">
+    <div class="txt col-12">
       <div class="form p-2">
         <div class="title">
-          <h2 class="my-3">Welcome To Estatein</h2>
+          <h2 class="my-3">Welcome To Mogasoft</h2>
         </div>
-        <div class="format">
-          <div class="form__group field">
-            <input name="text" id="name" class="form-control" placeholder="Enter Your name" #name="ngModel"
-              [(ngModel)]="user.name" type="text" class="form__field" placeholder="name" required>
-            <label for="name" class="form__label">Username</label>
+        <form [formGroup]="signupForm" (ngSubmit)="submit()">
+          <div class="format">
+            <div class="form__group field">
+              <input id="name" class="form-control form__field" placeholder="Enter Your Name" formControlName="userName"
+                required>
+              <label for="name" class="form__label">Username</label>
+            </div>
+            <div class="form__group field">
+              <input id="phone" class="form-control form__field" placeholder="Enter Your Phone" formControlName="phone"
+                required>
+              <label for="phone" class="form__label">Phone</label>
+            </div>
+            <div class="form__group field">
+              <input id="city" class="form-control form__field" placeholder="Enter Your Location" formControlName="city"
+                required>
+              <label for="city" class="form__label">Location</label>
+            </div>
+            <div class="form__group field">
+              <input id="email" class="form-control form__field" placeholder="Enter Your Email" formControlName="email"
+                required>
+              <label for="email" class="form__label">Email</label>
+            </div>
+            <div class="form__group field">
+              <input id="password" class="form-control form__field" placeholder="Enter Your Password"
+                formControlName="password" type="password" required>
+              <label for="password" class="form__label">Password</label>
+            </div>
+            <div class="btn-login mt-5 d-flex gap-5 align-items-center">
+              <button type="submit" class="btn-purble" [disabled]="signupForm.invalid">Sign Up</button>
+            </div>
           </div>
-          <div class="form__group field">
-            <input name="text" id="phone" class="form-control" placeholder="Enter Your Phone" #phone="ngModel"
-              [(ngModel)]="user.phone" type="text" class="form__field" placeholder="phone" required>
-            <label for="phone" class="form__label">Phone</label>
-          </div>
-          <div class="form__group field">
-            <input name="text" id="location" class="form-control" placeholder="Enter Your Location" #location="ngModel"
-              [(ngModel)]="user.location" type="text" class="form__field" placeholder="location" required>
-            <label for="location" class="form__label">Location</label>
-          </div>
-          <div class="form__group field">
-            <input name="email" id="email" class="form-control" placeholder="Enter Your Email" #email="ngModel"
-              [(ngModel)]="user.email" type="text" class="form__field" placeholder="Email" required>
-            <label for="Email" class="form__label">Email</label>
-          </div>
-          <div class="form__group field">
-            <input name="pass" id="pass" class="form-control" placeholder="Enter Your Password" #pass="ngModel"
-              [(ngModel)]="user.password" type="password" class="form__field" placeholder="password" required>
-            <label for="password" class="form__label">Password</label>
-          </div>
-          <div class="btn-login mt-5 d-flex gap-5 align-items-center">
-            <button (click)="submit()" type="submit" class="btn-purble">Sign Up</button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

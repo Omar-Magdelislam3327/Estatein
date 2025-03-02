@@ -1,10 +1,10 @@
 export class Agent {
-  id!:number;
+  id!: number;
   name!: string;
   phone!: string;
   email!: string;
-  image!:string;
-  location!:string;
+  image!: string;
+  location!: string;
 }
 
 export class Properties {

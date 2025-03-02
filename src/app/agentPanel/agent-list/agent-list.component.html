@@ -1,7 +1,7 @@
 <app-agent-nav></app-agent-nav>
 <main class="mt-4" @fadeInOut>
   <section>
-    <h1 class="text-light text-center">Welcome Back, {{ agent.name }}</h1>
+    <h1 class="text-light text-center">Welcome Back</h1>
   </section>
   <div class="container py-5">
     <div class="text-light">
@@ -18,9 +18,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let prop of prope">
-              <td>{{ prop.name }}</td>
-              <td><img width="120" [src]="prop.head" alt="error"></td>
+            <tr *ngFor="let prop of props">
+              <td>{{ prop?.name }}</td>
+              <td><img width="120" [src]="'http://mogarealstate.runasp.net/' + prop?.headImage" alt="error"></td>
               <td>{{ prop.type }}</td>
               <td>{{ prop.purpose }}</td>
               <td>{{ prop.price }}$</td>
@@ -28,8 +28,8 @@
                 <button [routerLink]="['/agent/edit', prop.id]" class="btn btn-warning me-3">
                   <i class="fs-5 fa-regular fa-pen-to-square"></i>
                 </button>
-                <button (click)="remove(prop.id)" class="btn btn-danger">
-                  <i class="fs-5 fa-solid fa-trash"></i>
+                <button (click)="makeSold(prop.id)" class="btn btn-danger">
+                  Sold
                 </button>
               </td>
             </tr>

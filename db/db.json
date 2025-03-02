@@ -11,10 +11,10 @@
           "location": "Cairo, Egypt"
         }
       ],
-      "name": "Metropolitan Haven",
+      "name": "Heaven Property",
       "price": "1,500,000",
-      "location": "Ezbet Elnakhl, Cairo",
-      "head": "assets/vendors/imgs/estate1.png",
+      "location": "Madintey, Cairo",
+      "head": "assets/vendors/imgs/estate2.png",
       "image1": "assets/vendors/imgs/apart.png",
       "image2": "assets/vendors/imgs/apart1.png",
       "image3": "assets/vendors/imgs/apart2.png",
@@ -25,6 +25,35 @@
       "description": "deeded",
       "id": 1,
       "purpose": "For Sale",
+      "parking": "Yes",
+      "wifi": "Yes",
+      "elevator": "Yes"
+    },
+    {
+      "agent": [
+        {
+          "name": "CD Property",
+          "phone": "010101010101",
+          "email": "cdproperty@gmail.com",
+          "image": "assets\\vendors\\imgs\\agent.png",
+          "location": "Alexandria, Egypt",
+          "id": 4
+        }
+      ],
+      "name": "Villa Hights",
+      "price": "1,500,000",
+      "location": "Badr City, Cairo",
+      "head": "assets/vendors/imgs/estate2.png",
+      "image1": "assets/vendors/imgs/apart.png",
+      "image2": "assets/vendors/imgs/apart1.png",
+      "image3": "assets/vendors/imgs/apart2.png",
+      "type": "Villa",
+      "bathNum": 3,
+      "bedNum": 3,
+      "area": 150,
+      "description": "d",
+      "id": 3,
+      "purpose": "For Rent",
       "parking": "Yes",
       "wifi": "Yes",
       "elevator": "Yes"
@@ -52,97 +81,11 @@
       "bedNum": 3,
       "area": 150,
       "description": "d",
-      "id": 2,
+      "id": 4,
       "purpose": "For Rent",
       "parking": "Yes",
       "wifi": "Yes",
       "elevator": "Yes"
-    },
-    {
-      "agent": [
-        {
-          "name": "CD Property",
-          "phone": "0123456789",
-          "email": "cdproperty@gmail.com",
-          "image": "assets\\vendors\\imgs\\agent.png",
-          "location": "Ismailya, Egypt",
-          "id": 4
-        }
-      ],
-      "name": "Fashe5a Gedan",
-      "price": "1,100,000",
-      "location": "New Capital, Cairo",
-      "head": "assets/vendors/imgs/estate.png",
-      "image1": "assets/vendors/imgs/apart.png",
-      "image2": "assets/vendors/imgs/apart1.png",
-      "image3": "assets/vendors/imgs/apart2.png",
-      "type": "Townhouse",
-      "bathNum": 3,
-      "bedNum": 3,
-      "area": 112,
-      "description": "deeded",
-      "id": 3,
-      "purpose": "For Sale",
-      "parking": "Yes",
-      "wifi": "Yes",
-      "elevator": "Yes"
-    },
-    {
-      "agent": [
-        {
-          "id": 5,
-          "name": "YZ Property",
-          "phone": "010101010101",
-          "email": "yzproperty@gmail.com",
-          "image": "assets\\vendors\\imgs\\agent.png",
-          "location": "Qena, Egypt"
-        }
-      ],
-      "name": "7elwa Awy",
-      "price": "800,000",
-      "location": "Elshorouk City , Cairo",
-      "head": "assets/vendors/imgs/estate1.png",
-      "image1": "assets/vendors/imgs/apart.png",
-      "image2": "assets/vendors/imgs/apart1.png",
-      "image3": "assets/vendors/imgs/apart2.png",
-      "type": "Apartment",
-      "bathNum": 3,
-      "area": 120,
-      "bedNum": 2,
-      "purpose": "For Sale",
-      "parking": "Yes",
-      "elevator": "Yes",
-      "wifi": "Yes",
-      "description": "vr",
-      "id": 4
-    },
-    {
-      "agent": [
-        {
-          "id": 6,
-          "name": "EF Property",
-          "phone": "0111789412",
-          "email": "efproperty@gmail.com",
-          "image": "assets/vendors/imgs/agent.png",
-          "location": "Matrouh , Egypt"
-        }
-      ],
-      "name": "UUUF",
-      "price": "1,200,000",
-      "head": "assets/vendors/imgs/estate1.png",
-      "image1": "assets/vendors/imgs/apart.png",
-      "image2": "assets/vendors/imgs/apart1.png",
-      "image3": "assets/vendors/imgs/apart2.png",
-      "type": "Townhouse",
-      "bathNum": 3,
-      "bedNum": 3,
-      "area": 150,
-      "purpose": "For Sale",
-      "parking": "Yes",
-      "elevator": "Yes",
-      "wifi": "Yes",
-      "description": "ddd",
-      "id": 5
     }
   ],
   "user": [
@@ -169,11 +112,13 @@
     {
       "id": 3,
       "image": "assets\\vendors\\imgs\\user.png",
-      "name": "Ahmed Mahfouz",
-      "email": "ahmedmahfouz@gmail.com",
+      "name": "Ahmed ",
+      "email": "ahmed@gmail.com",
       "password": "123456",
       "role": "user",
-      "favorites": [],
+      "favorites": [
+        1
+      ],
       "phone": "0123456789",
       "location": "Cairo, Egypt"
     },
@@ -238,33 +183,74 @@
       "image": "assets/vendors/imgs/user.png",
       "role": "user",
       "id": 8
+    },
+    {
+      "favorites": [
+        1
+      ],
+      "propertiesAdded": [],
+      "appointment": [],
+      "name": "Mahmoud",
+      "phone": "010101010",
+      "location": "Cairo , Egypt",
+      "email": "mahmoud@gmail.com",
+      "password": "123456",
+      "image": "assets/vendors/imgs/user.png",
+      "role": "user",
+      "id": 9
+    },
+    {
+      "favorites": [],
+      "propertiesAdded": [],
+      "appointment": [],
+      "name": "Mahmoud",
+      "phone": "01501883344",
+      "location": "Cairo",
+      "email": "mahmoud@gmail.com",
+      "password": "123456789",
+      "image": "assets/vendors/imgs/user.png",
+      "role": "user",
+      "id": 10
+    },
+    {
+      "favorites": [],
+      "propertiesAdded": [],
+      "appointment": [],
+      "name": "Mahmoud",
+      "phone": "01010101010",
+      "location": "Cairo",
+      "email": "mahmoud@gmail.com",
+      "password": "123456",
+      "image": "assets/vendors/imgs/user.png",
+      "role": "user",
+      "id": 11
     }
   ],
   "orders": [
     {
-      "userEmail": "ahmedmahfouz@gmail.com",
-      "userName": "Ahmed Mahfouz",
-      "propertyId": 2,
-      "propertyName": "Villa Archetype",
-      "date": "2024-08-08T10:19:42.446Z",
+      "userEmail": "mahmoud@gmail.com",
+      "userName": "Mahmoud",
+      "propertyId": 1,
+      "propertyName": "Metropolitan Haven",
+      "date": "2024-08-17T10:37:27.059Z",
       "status": "Pending",
       "id": 1
     },
     {
-      "userEmail": "ziad@gmail.com",
-      "userName": "Ziad Abdelsattar",
-      "propertyId": 3,
-      "propertyName": "Fashe5a Gedan",
-      "date": "2024-08-08T10:47:28.052Z",
+      "userEmail": "mahmoud@gmail.com",
+      "userName": "Mahmoud",
+      "propertyId": 1,
+      "propertyName": "Mahmoud Property",
+      "date": "2024-11-28T11:52:10.338Z",
       "status": "Pending",
       "id": 2
     },
     {
-      "userEmail": "fadyemad@gmail.com",
-      "userName": "Fady Emad",
+      "userEmail": "ahmedmahfouz@gmail.com",
+      "userName": "Ahmed Mahfouz",
       "propertyId": 1,
-      "propertyName": "Metropolitan Haven",
-      "date": "2024-08-09T01:21:28.409Z",
+      "propertyName": "Mahmoud Property",
+      "date": "2025-02-09T09:37:23.716Z",
       "status": "Pending",
       "id": 3
     }

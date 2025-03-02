@@ -19,33 +19,46 @@ import { AddAgenetComponent } from './adminPanel/agents/add-agenet/add-agenet.co
 import { ListAgenetComponent } from './adminPanel/agents/list-agenet/list-agenet.component';
 import { MessagesComponent } from './agentPanel/messages/messages.component';
 import { OrderComponent } from './adminPanel/order/order.component';
+import { AgentOrdersComponent } from './agentPanel/agent-orders/agent-orders.component';
 
 export const routes: Routes = [
-  {path:"" , component:LoginComponent , canActivate: [AuthGuard] },
-  {path:"sign-up" , component:SignupComponent , title:"Estatein | Sign Up"},
-  {path:"home" , component:HomeComponent , title:"Estatein | Home"},
-  {path:"about" , component:AboutComponent , title:"Estatein | About Us"},
-  {path:"services" , component:ServicesComponent , title:"Estatein | Services"},
-  {path:"properties" , component:PropComponent , title:"Estatein | Properties"},
-  {path:"properties/:id" , component:PropDetailsComponent , title:"Estatein | Properties"},
-  {path:"profile", component:ProfileComponent , title:"Estatein | Profile"},
-  {path:"contact" , component:ContactComponent , title:"Estatein | Contact"},
-  {path:"admin", children:[
-    {path:"dashboard" , component:DashboardComponent , title:"Estatein | Dashboard"},
-    {path:"properties" , children:[
-      {path:"list" , component:ListpropComponent , title:"Estatein | Properties"},
-    ]},
-    {path:"agents" , children:[
-      {path:"add" , component:AddAgenetComponent , title:"Estatein | Agents"},
-      {path:"list" , component:ListAgenetComponent , title:"Estatein | Agents"}
-    ]},
-    {path:"orders" , component:OrderComponent , title:"Estatein | Orders"}
-  ]},
-  {path:"agent" , children:[
-    {path:"add" , component:AddpropComponent , title:"Estatein | Add Property"},
-    {path:"edit/:id" , component:EditpropComponent , title:"Estatein | Edit Property"},
-    {path:"list" , component:AgentListComponent , title:"Estatein | List"},
-    {path:"messages" , component:MessagesComponent , title:"Estatein | Messages"},
-    {path:"dashboard" , component:AgnetdashboardComponent , title:"Estatein | Dashboard"}
-  ]}
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "login", component: LoginComponent, title: "Mogasoft | Login" },
+  { path: "sign-up", component: SignupComponent, title: "Mogasoft | Sign Up" },
+  { path: "home", component: HomeComponent, title: "Mogasoft | Home" },
+  { path: "about", component: AboutComponent, title: "Mogasoft | About Us" },
+  { path: "services", component: ServicesComponent, title: "Mogasoft | Services" },
+  { path: "properties", component: PropComponent, title: "Mogasoft | Properties" },
+  { path: "properties/:id", component: PropDetailsComponent, title: "Mogasoft | Properties" },
+  { path: "profile", data: { role: "User" }, component: ProfileComponent, title: "Mogasoft | Profile" },
+  { path: "contact", component: ContactComponent, title: "Mogasoft | Contact" },
+  {
+    path: "admin",
+    children: [
+      { path: "dashboard", data: { role: "Admin" }, component: DashboardComponent, title: "Mogasoft | Dashboard", canActivate: [AuthGuard] },
+      {
+        path: "properties", children: [
+          { path: "list", data: { role: "Admin" }, component: ListpropComponent, title: "Mogasoft | Properties", canActivate: [AuthGuard] },
+        ]
+      },
+      {
+        path: "agents", children: [
+          { path: "add", data: { role: "Admin" }, component: AddAgenetComponent, title: "Mogasoft | Agents", canActivate: [AuthGuard] },
+          { path: "list", data: { role: "Admin" }, component: ListAgenetComponent, title: "Mogasoft | Agents", canActivate: [AuthGuard] }
+        ]
+      },
+      // { path: "orders", data: { role: "Admin" }, component: OrderComponent, title: "Mogasoft | Orders", canActivate: [AuthGuard] }
+    ]
+  },
+  {
+    path: "agent", children: [
+      { path: "add", data: { role: "Agent" }, component: AddpropComponent, title: "Mogasoft | Add Property", canActivate: [AuthGuard] },
+      { path: "edit/:id", data: { role: "Agent" }, component: EditpropComponent, title: "Mogasoft | Edit Property", canActivate: [AuthGuard] },
+      { path: "list", data: { role: "Agent" }, component: AgentListComponent, title: "Mogasoft | List", canActivate: [AuthGuard] },
+      { path: "messages", data: { role: "Agent" }, component: MessagesComponent, title: "Mogasoft | Messages", canActivate: [AuthGuard] },
+      { path: "orders", data: { role: "Agent" }, component: AgentOrdersComponent, title: "Mogasoft | Order", canActivate: [AuthGuard] },
+      { path: "dashboard", data: { role: "Agent" }, component: AgnetdashboardComponent, title: "Mogasoft | Dashboard", canActivate: [AuthGuard] }
+    ]
+  },
+  { path: "**", redirectTo: "/home", pathMatch: 'full' }
 ];

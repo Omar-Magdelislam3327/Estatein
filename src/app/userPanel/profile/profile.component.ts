@@ -1,27 +1,28 @@
+import { FooterComponent } from './../shared/footer/footer.component';
 import { Component, OnInit } from '@angular/core';
-import { User } from './../../modules/User';
-import { Properties } from './../../modules/Properties';
-import { UsersapiService } from '../../services/usersapi.service';
 import { PropertiesapiService } from '../../services/propertiesapi.service';
-import { NgFor, NgIf } from '@angular/common';
 import { NavComponent } from '../shared/nav/nav.component';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { favorites } from '../../modules/favorites';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { CommonModule } from '@angular/common';
+import { UsersapiService } from '../../services/usersapi.service';
+import { MessageService } from 'primeng/api';
+
 
 @Component({
-  standalone:true,
-  imports:[
-    NgIf,
-    NgFor,
+  standalone: true,
+  imports: [
     NavComponent,
+    FooterComponent,
     FormsModule,
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  providers: [MessageService],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -35,62 +36,53 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class ProfileComponent implements OnInit {
-  user= new User()
-  favoriteProperties: Properties[] = [];
-  id!:any;
-    constructor(private userApi: UsersapiService, private propApi: PropertiesapiService , private active : ActivatedRoute , private router : Router) {
-      let loggedIn = JSON.parse(localStorage.getItem("user") || "false");
-      if (!loggedIn) {
-      this.router.navigateByUrl('/');
-    }
-      this.id = this.active.snapshot.params["id"];
-    }
-    // remove(id:any){
-    //   this.loadFavoriteProperties;
-    //   this.getUserId;
-    //   const userId = this.getUserId();
-    //   const userString = localStorage.getItem('user');
-    //   this.userApi.getById(userId).subscribe((data:any)=>{
-    //     this.user = data;
-    //     this.propApi.delete(id).subscribe((res:any)=>{
-    //       console.log(this.user.favorites);
-    //       console.log(res);
-    //     })
-    //   })
-    // }
+  userId!: any;
+  user!: any;
+  favoriteProperties!: any;
+
+  constructor(private router: Router, private propAPI: PropertiesapiService, private userAPI: UsersapiService, private messageService: MessageService) {
+    this.userId = localStorage.getItem('userId');
+    this.loadFavoriteProperties();
+    this.loadUserData();
+  }
 
 
-    ngOnInit(): void {
-      const userId = this.getUserId();
-      if (userId) {
-        this.userApi.getById(userId).subscribe((user: User) => {
-          this.user = user;
-          this.loadFavoriteProperties();
-        });
-      }
-      window.scrollTo(0, 0);
-    }
-
-  getUserId(): number | null {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      const userId = JSON.parse(userString).id;
-      return userId;
-    }
-    return null;
+  ngOnInit(): void {
+    window.scrollTo(0, 0);
   }
 
   loadFavoriteProperties(): void {
-    if (this.user) {
-      this.user.favorites.forEach((propertyId) => {
-        this.propApi.getById(propertyId).subscribe((property: Properties) => {
-          this.favoriteProperties.push(property);
-        });
-      });
-    }
+    this.propAPI.getFavs(this.userId).subscribe({
+      next: (data: any) => {
+        this.favoriteProperties = data;
+      }, error: (err: any) => {
+        console.log(err);
+      }
+    })
   }
-  logout(){
-    localStorage.removeItem("user");
-    this.router.navigateByUrl("/")
+  loadUserData(): void {
+    this.userAPI.getUserData(this.userId).subscribe({
+      next: (data: any) => {
+        this.user = data;
+        console.log(this.user);
+
+      }, error: (err: any) => {
+        console.log(err);
+      }
+    })
+  }
+  deleteFavorite(propertyId: number): void {
+    this.propAPI.removeFav(this.userId, propertyId).subscribe({
+      next: (data: any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deleted from favorites' });
+        this.loadFavoriteProperties();
+      }, error: (err: any) => {
+        console.log(err);
+      }
+    })
+  }
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl("/");
   }
 }

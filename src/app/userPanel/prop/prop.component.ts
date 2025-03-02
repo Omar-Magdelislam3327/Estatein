@@ -3,15 +3,16 @@ import { NavComponent } from '../shared/nav/nav.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { PropertiesapiService } from '../../services/propertiesapi.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-prop',
   standalone: true,
-  imports: [NavComponent, FooterComponent, HttpClientModule, RouterLink, NgFor, NgIf , FormsModule],
+  imports: [NavComponent, FooterComponent, HttpClientModule, RouterLink, CommonModule, FormsModule, NgxPaginationModule],
   templateUrl: './prop.component.html',
   styleUrls: ['./prop.component.css'],
   animations: [
@@ -27,44 +28,92 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class PropComponent implements OnInit {
-  property: any[] = [];
+  properties: any[] = [];
   filteredProperties: any[] = [];
-  filters = {
-    location: '',
-    propertyType: '',
-    priceRange: '',
-    size: ''
-  };
-
+  //
+  selectedLocation: any = '';
+  selectedPriceRange: any = '';
+  selectedType: any = '';
+  selectedSize: any = '';
+  //
+  locations!: any[];
+  //
+  currentPage: number = 1;
+  pageSize: number = 3;
+  total: number = 0;
+  fixed = Math.ceil(this.total / this.pageSize);
+  showPagination: boolean = false;
+  isFiltering: boolean = false;
   constructor(private api: PropertiesapiService) {
-    this.api.get().subscribe((data: any) => {
-      this.filteredProperties = data.properties;
-      this.property = data;
-    });
+    this.getProperties();
+    this.getLocations();
   }
-  ngOnInit(){
+  ngOnInit() {
     window.scrollTo(0, 0);
   }
-  searchProperties() {
-    this.filteredProperties = this.property.filter(prop => {
-      const location = prop.location || '';
-      return (
-        (this.filters.location ? location.includes(this.filters.location) : true) &&
-        (this.filters.propertyType ? prop.type === this.filters.propertyType : true) &&
-        (this.filters.priceRange ? this.isPriceInRange(prop.price, this.filters.priceRange) : true) &&
-        (this.filters.size ? this.isSizeInRange(prop.area, this.filters.size) : true)
-      );
+  getProperties() {
+    this.api.getProperties().subscribe({
+      next: (data: any) => {
+        this.properties = data.data;
+        console.log(data);
+        this.total = data.count;
+        this.fixed = Math.ceil(this.total / this.pageSize);
+        this.showPagination = this.total > this.pageSize;
+        this.isFiltering = false;
+        console.log('Total props:', this.total);
+        console.log('Pages needed:', this.fixed);
+        console.log('Show pagination:', this.showPagination);
+        console.log('props:', this.properties);
+        this.filteredProperties = [...this.properties];
+      },
+      error: (err) => console.error(err),
     });
   }
-
-  isPriceInRange(price: string, range: string): boolean {
-    const priceNumber = parseFloat(price.replace(/[^0-9.]/g, ''));
-    const [min, max] = range.split('-').map(val => parseFloat(val.replace('<', '').replace(',', '')));
-    return priceNumber >= (min || 0) && (max ? priceNumber <= max : true);
+  getLocations() {
+    this.api.getAllLocalizations().subscribe({
+      next: (data: any) => {
+        this.locations = data.locations;
+        console.log(this.locations);
+      },
+      error: (err) => console.error(err),
+    });
   }
+  filterProperties() {
+    this.filteredProperties = this.properties.filter((property) => {
+      let propLocation = this.selectedLocation ? property.location === this.selectedLocation : true;
+      let propType = this.selectedType ? property.type === this.selectedType : true;
+      let propSize = true;
+      if (this.selectedSize) {
+        const [min, max] = this.selectedSize.split('-').map(Number);
+        propSize = property.size >= min && property.size <= max;
+      }
+      let propPrice = true;
+      if (this.selectedPriceRange) {
+        const [min, max] = this.selectedPriceRange.split('-').map(Number);
+        propPrice = property.price >= min && property.price <= max;
+      }
+      this.isFiltering = true;
+      return propType && propSize && propPrice && propLocation;
+    });
+    this.total = this.filteredProperties.length;
+    this.fixed = Math.ceil(this.total / this.pageSize);
+    this.showPagination = this.total > this.pageSize;
+    this.isFiltering = true;
 
-  isSizeInRange(size: number, range: string): boolean {
-    const [min, max] = range.split('-').map(val => parseFloat(val));
-    return size >= (min || 0) && (max ? size <= max : true);
+    console.log('Filtered Properties:', this.filteredProperties);
+    console.log('New Total:', this.total);
+    console.log('Updated Pages Needed:', this.fixed);
+    console.log('Show Pagination:', this.showPagination);
+  }
+  clearFilter() {
+    this.selectedLocation = '';
+    this.selectedType = '';
+    this.selectedSize = '';
+    this.selectedPriceRange = '';
+    this.filteredProperties = [...this.properties];
+  }
+  pageChanged(event: number): void {
+    this.currentPage = event;
+    this.isFiltering ? this.filterProperties() : this.getProperties();
   }
 }

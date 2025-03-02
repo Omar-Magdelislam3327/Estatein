@@ -5,6 +5,7 @@ import { User } from '../../../modules/Properties';
 import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { AgentapiserviceService } from '../../../services/agentapiservice.service';
 
 @Component({
   selector: 'app-list-agenet',
@@ -29,16 +30,14 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class ListAgenetComponent {
-  agent!:any
-  constructor(private api:UsersapiService , private router : Router) {
-    let loggedIn = JSON.parse(localStorage.getItem("admin") || "false");
-    if (!loggedIn) {
-      this.router.navigateByUrl('/home');
-    }
-    this.api.get().subscribe((data:any)=>{
-      this.agent = data.filter((agents : User)=> agents.role === "agent")
+  agent!: any
+  constructor(private agentAPI: AgentapiserviceService, private router: Router) {
+    this.getAgents();
+  }
+  getAgents() {
+    this.agentAPI.getAgents().subscribe((data: any) => {
+      this.agent = data;
       console.log(this.agent);
-
     })
   }
 }

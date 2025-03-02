@@ -10,7 +10,6 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   standalone: true,
   imports: [
     AdminNavComponent,
-    RouterLink,
     NgFor
   ],
   templateUrl: './listprop.component.html',
@@ -28,20 +27,18 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   ],
 })
 export class ListpropComponent {
-  prop!:any;
-  id!:any;
-  constructor(private router : Router , private activ : ActivatedRoute , private api : PropertiesapiService){
+  prop!: any;
+  id!: any;
+  constructor(private router: Router, private activ: ActivatedRoute, private api: PropertiesapiService) {
     this.id = this.activ.snapshot.params["id"];
-    this.api.get().subscribe((data:any)=>{
-      this.prop = data
+    this.api.getProperties().subscribe((data: any) => {
+      this.prop = data.data
+      console.log(this.prop);
     })
-    let loggedIn = JSON.parse(localStorage.getItem("admin") || "false");
-    if (!loggedIn){
-      this.router.navigate(['/home']);
-    }
+
   }
-  remove(id:number){
-    this.api.delete(id).subscribe((data:any)=>{
+  remove(id: number) {
+    this.api.deleteProperty(id).subscribe((data: any) => {
       location.reload()
     })
   }

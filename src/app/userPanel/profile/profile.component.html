@@ -1,26 +1,26 @@
 <app-nav></app-nav>
 <div class="section1 p-5" @fadeInOut>
   <div class="container">
-    <div class="row" *ngIf="user">
+    <div class="row">
       <div class="col-lg-4 col-md-12 mb-4">
         <div class="lft text-center p-3">
           <div class="imag mb-3">
-            <img [src]="user.image" alt="error" class="img-fluid p-2 rounded" width="140">
+            <img src="assets/vendors/imgs/user.png" alt="error" class="img-fluid p-2 rounded" width="140">
           </div>
           <div class="user-info text-white">
-            <h4>{{user.name}}</h4>
+            <h4>{{user?.userName}}</h4>
             <hr>
             <div class="d-flex justify-content-start align-items-center flex-wrap gap-3 mt-3">
               <i class="fa-regular fa-envelope fs-4"></i>
-              <p class="m-0 text-white">{{user.email}}</p>
+              <p class="m-0 text-white">{{user?.email}}</p>
             </div>
             <div class="d-flex justify-content-start align-items-center flex-wrap gap-3 mt-3">
               <i class="fa-solid fa-mobile-screen-button fs-4"></i>
-              <p class="m-0 text-white">{{user.phone}}</p>
+              <p class="m-0 text-white">{{user?.phone}}</p>
             </div>
             <div class="d-flex justify-content-start align-items-center flex-wrap gap-3 mt-3">
               <i class="fa-solid fa-location-dot fs-4"></i>
-              <p class="m-0 text-white">{{user.location}}</p>
+              <p class="m-0 text-white">{{user?.city}}</p>
             </div>
             <button (click)="logout()" class="btn btn-danger mt-3">Log Out</button>
           </div>
@@ -42,17 +42,28 @@
                     <p> This handy feature is perfect for organizing and refining choices, making
                       sure that the most appealing properties are always at the fingertips.</p>
                   </div>
-                  <div class="row mt-5">
+                  <div class="row mt-5" *ngIf="favoriteProperties?.length > 0">
                     <div class="col-lg-4 col-md-6 col-12" *ngFor="let property of favoriteProperties">
                       <div class="card">
+                        <div class="delete">
+                          <button class="btn btn-danger" (click)="deleteFavorite(property.id)">Delete</button>
+                        </div>
                         <a class="text-reset text-decoration-none" routerLink="/properties/{{property.id}}">
-                          <img [src]="property.head" class="card-img-top" alt="...">
-                          <div class="carde-body">
-                            <h5 class="card-title">{{property.name}}</h5>
-                            <p class="card-text">{{property.location}}</p>
-                            <p class="card-text">${{property.price}}</p>
+                          <img [src]="'http://mogarealstate.runasp.net' + property?.headImage" class="card-img-top"
+                            alt="...">
+                          <div class="carde-body p-2">
+                            <h5 class="card-title text-white">{{property.name}}</h5>
+                            <p class="card-text text-white-50">{{property.location}}</p>
+                            <p class="card-text text-white-50">{{property.price}}$</p>
                           </div>
                         </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-5" *ngIf="favoriteProperties?.length === 0">
+                    <div class="col-12">
+                      <div class="text-center">
+                        <h4 class="text-white">No Favorite Properties</h4>
                       </div>
                     </div>
                   </div>
@@ -68,3 +79,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

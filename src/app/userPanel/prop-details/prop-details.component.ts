@@ -6,17 +6,22 @@ import { UsersapiService } from '../../services/usersapi.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Properties } from './../../modules/Properties';
 import { User } from './../../modules/User';
-import { NgIf , NgFor } from '@angular/common';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { OrdersapiService } from '../../services/ordersapi.service';
 import { Order } from '../../modules/order';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-prop-details',
   standalone: true,
-  imports: [NavComponent, FooterComponent , NgIf , NgFor , RouterLink],
+  imports: [NavComponent, FooterComponent, CommonModule, ReactiveFormsModule, ToastModule],
   templateUrl: './prop-details.component.html',
   styleUrls: ['./prop-details.component.css'],
+  providers: [MessageService],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -31,27 +36,29 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 })
 export class PropDetailsComponent {
   id!: any;
-  prop = new Properties();
-  user: User | null = null;
-
+  prop !: any;
+  userId!: any;
+  isFavorite!: boolean;
+  //
+  changesForm!: FormGroup;
   constructor(
     private api: PropertiesapiService,
     private activ: ActivatedRoute,
-    private userApi: UsersapiService,
-    private orderApi : OrdersapiService
+    private fb: FormBuilder,
+    private orderAPI: OrdersapiService,
+    private messageService: MessageService
   ) {
-    this.id = this.activ.snapshot.params["id"];
-    this.api.getById(this.id).subscribe((data: any) => {
-      this.prop = data;
-    });
-    const userId = this.getUserId();
-    if (userId) {
-      this.userApi.getById(userId).subscribe((user: User) => {
-        this.user = user;
+    this.activ.paramMap.subscribe(params => {
+      this.id = Number(params.get("id"));
+      this.api.getPropertyById(this.id).subscribe((data: any) => {
+        this.prop = data;
+        console.log(this.prop);
       });
-    }
+    });
+    this.userId = localStorage.getItem('userId');
+    this.isFav();
   }
-  ngOnInit(){
+  ngOnInit() {
     window.scrollTo(0, 0);
   }
   getUserId(): number | null {
@@ -64,25 +71,93 @@ export class PropDetailsComponent {
   }
 
   addToFav() {
-    if (this.user && !this.user.favorites.includes(this.prop.id)) {
-      this.user.favorites.push(this.prop.id);
-      this.userApi.put(this.user.id, this.user).subscribe(() => {
-        alert('Property added to favorites');
-      });
+    if (!this.isUserLoggedIn()) {
+      this.showLoginAlert();
+      return;
     }
+    this.api.addPropertyToFavorites(this.userId, this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.messageService.add(
+          {
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Added to favorites!',
+            life: 2000
+          }
+        );
+        this.isFav();
+      },
+      error: (error) => {
+        console.log(error);
+        this.messageService.add(
+          {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'The Property is already in your favorites!',
+            life: 2000
+          });
+      }
+    });
+  }
+  isFav() {
+    this.api.isFavorite(this.userId, this.id).subscribe({
+      next: (data: any) => {
+        this.isFavorite = data;
+        console.log('Fav:', this.isFavorite)
+      }, error: (error) => {
+        console.log(error);
+        console.log('err:', this.isFavorite)
+      }
+    })
   }
   orderProperty() {
-    if (this.user && this.prop) {
-      const order = new Order();
-      order.userEmail = this.user.email;
-      order.userName = this.user.name;
-      order.propertyId = this.prop.id;
-      order.propertyName = this.prop.name;
-      order.date = new Date();
-      order.status = 'Pending';
-      this.orderApi.post(order).subscribe(() => {
-        alert('Order placed successfully!');
-      });
+    if (!this.isUserLoggedIn()) {
+      this.showLoginAlert();
+      return;
     }
+    this.orderAPI.addOrder(this.userId, this.id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.messageService.add(
+          {
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Appointment made successfully!',
+            life: 2000
+          });
+
+      }, error: (error) => {
+        console.log(error);
+        this.messageService.add(
+          {
+            severity: 'error',
+            summary: 'Error',
+            detail: 'You already have an appointment for this property!',
+            life: 2000
+          });
+
+      }
+    })
+  }
+  isUserLoggedIn(): boolean {
+    const user = localStorage.getItem('userId');
+    return user !== null;
+  }
+  showLoginAlert() {
+    Swal.fire({
+      title: 'Login Required',
+      text: 'You need to log in to perform this action.',
+      icon: 'warning',
+      background: '#1e1e1e',
+      color: 'white',
+      confirmButtonColor: '#A70A9A',
+      confirmButtonText: 'Login',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/login';
+      }
+    });
   }
 }

@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
-import { AdminNavComponent } from '../../userPanel/shared/admin-nav/admin-nav.component';
-import { OrdersapiService } from '../../services/ordersapi.service';
-import { NgFor } from '@angular/common';
-import { Router } from '@angular/router';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { AgentNavComponent } from '../../userPanel/shared/agent-nav/agent-nav.component';
+import { CommonModule } from '@angular/common';
 import { PropertiesapiService } from '../../services/propertiesapi.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { OrdersapiService } from '../../services/ordersapi.service';
 
 @Component({
-  selector: 'app-order',
+  selector: 'app-agent-orders',
   standalone: true,
   imports: [
-    AdminNavComponent,
-    NgFor
+    AgentNavComponent,
+    CommonModule,
+    ReactiveFormsModule
   ],
-  templateUrl: './order.component.html',
-  styleUrl: './order.component.css',
+  templateUrl: './agent-orders.component.html',
+  styleUrl: './agent-orders.component.css',
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -28,7 +28,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     ]),
   ],
 })
-export class OrderComponent {
+export class AgentOrdersComponent {
   orders!: any;
   agentId: number;
   changesForm!: FormGroup;

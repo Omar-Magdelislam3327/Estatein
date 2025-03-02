@@ -1,0 +1,43 @@
+<app-agent-nav></app-agent-nav>
+<main class="mt-4" @fadeInOut>
+  <div class="container py-5">
+    <div class="text-light">
+      <div class="table-responsive">
+        <table class="table table-dark table-hover text-center">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Property Name</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>Date</th>
+              <th>Statues</th>
+              <th colspan="3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td>{{ order.orderId }}</td>
+              <td>{{ order.propertyName }}</td>
+              <td>{{ order.userName }}</td>
+              <td>{{ order.userEmail }}</td>
+              <td>{{ order.date }}</td>
+              <td>{{ order.status }}</td>
+              <td>
+                <button class="btn btn-info mx-2" (click)="changeStatus(order.orderId, 'InProcess')">
+                  Process
+                </button>
+                <button class="btn btn-danger mx-2" (click)="changeStatus(order.orderId, 'Canceled')">
+                  Cancelled
+                </button>
+                <button class="btn btn-success mx-2" (click)="changeStatus(order.orderId, 'Confirmed')">
+                  Sold
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

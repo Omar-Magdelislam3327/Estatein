@@ -4,27 +4,21 @@
     <div class="card text-light">
       <div class="card-body">
         <h2 class="text-success text-center fw-bold">Add New Agent</h2>
-        <form>
+        <form [formGroup]="agentForm" (ngSubmit)="add()">
           <div class="form-group mt-2">
             <label class="form-label">Agent Name</label>
-            <input #name="ngModel" [(ngModel)]="agent.name" type="text" class="form-control shadow-none shadow-none"
-              name="name" id="name" placeholder="Enter Agent Name" required />
+            <input formControlName="Name" type="text" class="form-control shadow-none shadow-none" name="name" id="name"
+              placeholder="Enter Agent Name" required />
           </div>
           <div class="info mt-2 row">
 
-            <div class="col-lg-6 col-12">
-              <div class="form-group">
-                <label class="form-label">Agent Location</label>
-                <input class="form-control shadow-none" placeholder="Enter Agent Location" type="text"
-                  #location="ngModel" [(ngModel)]="agent.location" id="location" name="location">
-              </div>
-            </div>
 
-            <div class="col-lg-6 col-12">
+
+            <div class="col-lg- col-12">
               <div class="form-group">
                 <label class="form-label">Agent Phone</label>
-                <input class="form-control shadow-none" placeholder="Enter Agent Phone" type="text" #phone="ngModel"
-                  [(ngModel)]="agent.phone" id="phone" name="phone">
+                <input formControlName="Phone" class="form-control shadow-none" placeholder="Enter Agent Phone"
+                  type="text" id="phone" name="phone">
               </div>
             </div>
           </div>
@@ -33,16 +27,16 @@
             <div class="col-lg-6 col-12">
               <div class="form-group">
                 <label class="form-label">Agent Email</label>
-                <input class="form-control shadow-none" placeholder="Enter Agent Email" type="text" #email="ngModel"
-                  [(ngModel)]="agent.email" id="email" name="email">
+                <input formControlName="Email" class="form-control shadow-none" placeholder="Enter Agent Email"
+                  type="text" id="email" name="email">
               </div>
             </div>
 
             <div class="col-lg-6 col-12">
               <div class="form-group">
                 <label class="form-label">Agent Password</label>
-                <input class="form-control shadow-none" placeholder="Enter Agent Password" type="password"
-                  #password="ngModel" [(ngModel)]="agent.password" id="password" name="password">
+                <input formControlName="Password" class="form-control shadow-none" placeholder="Enter Agent Password"
+                  type="password" id="password" name="password">
               </div>
             </div>
           </div>
@@ -50,15 +44,14 @@
           <div class="col-12">
             <div class="form-group mt-2">
               <label class="form-label">Agent Logo</label>
-              <input #image="ngModel" [(ngModel)]="agent.image" type="url" class="form-control shadow-none" name="image"
-                id="image" placeholder="Image URL" required />
+              <input type="file" class="form-control shadow-none" name="image" id="image" formControlName="Image"
+                (change)="onFileSelected($event)">
             </div>
           </div>
 
 
           <div class="form-group mt-3 text-center">
-            <button (click)="add()" type="submit" class="btn-purble"
-              [disabled]="name.invalid || location.invalid || image.invalid">Add
+            <button type="submit" class="btn-purble" [disabled]="agentForm.invalid">Add
               Agent</button>
           </div>
         </form>

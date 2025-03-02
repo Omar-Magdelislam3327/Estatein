@@ -4,141 +4,139 @@
     <div class="card text-light">
       <div class="card-body">
         <h2 class="text-success text-center fw-bold">Add New Property</h2>
-        <form>
+        <form [formGroup]="propertyForm" (ngSubmit)="addProperty()">
           <div class="form-group mt-2">
             <label class="form-label">Property Name</label>
-            <input #name="ngModel" [(ngModel)]="props.name" type="text" class="form-control shadow-none" name="name"
-              id="name" placeholder="Enter Property Name" required />
+            <input type="text" class="form-control shadow-none" formControlName="name" placeholder="Enter Property Name"
+              required />
           </div>
+
           <div class="price mt-2 row">
             <div class="col-lg-6 col-12">
-              <div class="form-group ">
+              <div class="form-group">
                 <label class="form-label">Property Price</label>
-                <input #price="ngModel" [(ngModel)]="props.price" type="text" class="form-control shadow-none"
-                  name="price" id="price" placeholder="Enter Price" required />
+                <input type="number" class="form-control shadow-none" formControlName="price" placeholder="Enter Price"
+                  required />
               </div>
             </div>
             <div class="col-lg-6 col-12">
               <div class="form-group">
                 <label class="form-label">Property Location</label>
-                <div class="input-group">
-                  <!-- <select class="form-select shadow-none" #location="ngModel" [(ngModel)]="props.location">
-                    <option value="" selected disabled>Select Location</option>
-                    <option value="Ezbet Elnakhl">Ezbet Elnakhl, Cairo</option>
-                    <option value="Badr City">Badr City, Cairo</option>
-                    <option value="Elshorouk City">Elshorouk City, Cairo</option>
-                    <option value="Future City">Future City, Cairo</option>
-                    <option value="New Capital">New Capital, Cairo</option>
-                  </select> -->
-                  <input class="form-control shadow-none" #location="ngModel" [(ngModel)]="props.location"
-                    [(ngModel)]="props.location" type="text">
-                </div>
+                <input type="text" class="form-control shadow-none" formControlName="location"
+                  placeholder="Enter Location">
               </div>
             </div>
           </div>
+
           <div class="imgs mt-2 row">
             <div class="col-12">
               <div class="form-group mt-2">
                 <label class="form-label">Property Head Image</label>
-                <input #head="ngModel" [(ngModel)]="props.head" type="url" class="form-control shadow-none" name="head"
-                  id="head" placeholder="Image URL" required />
+                <input type="file" class="form-control shadow-none" (change)="onFileSelected($event, 'headImage')" />
               </div>
             </div>
             <div class="col-lg-4 col-12">
               <div class="form-group mt-2">
-                <label class="form-label">Property Image</label>
-                <input #image1="ngModel" [(ngModel)]="props.image1" type="url" class="form-control shadow-none"
-                  name="image1" id="image1" placeholder="Image URL" required />
+                <label class="form-label">Property Image 1</label>
+                <input type="file" class="form-control shadow-none" (change)="onFileSelected($event, 'image1')" />
               </div>
             </div>
             <div class="col-lg-4 col-12">
               <div class="form-group mt-2">
-                <label class="form-label">Property Image</label>
-                <input #image2="ngModel" [(ngModel)]="props.image2" type="url" class="form-control shadow-none"
-                  name="image2" id="image2" placeholder="Image URL" required />
+                <label class="form-label">Property Image 2</label>
+                <input type="file" class="form-control shadow-none" (change)="onFileSelected($event, 'image2')" />
               </div>
             </div>
             <div class="col-lg-4 col-12">
               <div class="form-group mt-2">
-                <label class="form-label">Property Image</label>
-                <input #image3="ngModel" [(ngModel)]="props.image3" type="url" class="form-control shadow-none"
-                  name="image3" id="image3" placeholder="Image URL" required />
+                <label class="form-label">Property Image 3</label>
+                <input type="file" class="form-control shadow-none" (change)="onFileSelected($event, 'image3')" />
               </div>
             </div>
           </div>
+
+          <div class="form-group mt-2">
+            <label class="form-label">Property Video</label>
+            <input type="file" class="form-control shadow-none" (change)="onFileSelected($event, 'video')" />
+          </div>
+
           <div class="form-group mt-2">
             <label class="form-label">Property Type</label>
-            <select class="form-select shadow-none" name="type" id="type" #type="ngModel" [(ngModel)]="props.type">
+            <select class="form-select shadow-none" formControlName="type">
+              <option value="House"> House</option>
               <option value="Villa"> Villa</option>
               <option value="Apartment"> Apartment</option>
-              <option value="Townhouse"> Townhouse</option>
-              <option value="Condominium"> Condominium</option>
-              <option value="Single Family Home"> Single Family Home</option>
+              <option value="Office"> Office</option>
+              <option value="Store"> Store</option>
             </select>
           </div>
+
           <div class="info mt-2 row">
-            <div class="col-lg-4 col-12">
+            <div class="col-lg-3 col-12">
               <div class="form-group mt-2">
-                <label class="form-label">Num of bathrooms</label>
-                <input #bathNum="ngModel" [(ngModel)]="props.bathNum" type="number" class="form-control shadow-none"
-                  name="bathNum" id="bathNum" placeholder="Num of Baths" required />
+                <label class="form-label">Bathrooms</label>
+                <input type="number" class="form-control shadow-none" formControlName="bathroomsCount"
+                  placeholder="Num of Baths" required />
               </div>
             </div>
-            <div class="col-lg-4 col-12">
+            <div class="col-lg-3 col-12">
               <div class="form-group mt-2">
-                <label class="form-label">Num of bedrooms</label>
-                <input #bedNum="ngModel" [(ngModel)]="props.bedNum" type="number" class="form-control shadow-none"
-                  name="bedNum" id="bedNum" placeholder="Num of Beds" required />
+                <label class="form-label">Bedrooms</label>
+                <input type="number" class="form-control shadow-none" formControlName="roomsCount"
+                  placeholder="Num of Beds" required />
               </div>
             </div>
-            <div class="col-lg-4 col-12">
+            <div class="col-lg-3 col-12">
+              <div class="form-group mt-2">
+                <label class="form-label">Floors</label>
+                <input type="number" class="form-control shadow-none" formControlName="floorsCount"
+                  placeholder="Num of Floors" required />
+              </div>
+            </div>
+            <div class="col-lg-3 col-12">
               <div class="form-group mt-2">
                 <label class="form-label">Property Area</label>
-                <input #area="ngModel" [(ngModel)]="props.area" type="number" class="form-control shadow-none"
-                  name="area" id="area" placeholder="Enter Area" required />
+                <input type="number" class="form-control shadow-none" formControlName="size" placeholder="Enter Area"
+                  required />
               </div>
             </div>
           </div>
+
           <div class="form-group mt-2">
             <label class="form-label">Property Purpose</label>
-            <select class="form-select shadow-none" name="purpose" id="purpose" #purpose="ngModel"
-              [(ngModel)]="props.purpose">
-              <option value="For Rent"> For Rent</option>
-              <option value="For Sale"> For Sale</option>
+            <select class="form-select shadow-none" formControlName="purpose">
+              <option value="ForRent"> For Rent</option>
+              <option value="ForSale"> For Sale</option>
             </select>
           </div>
+
           <div class="checks mt-2 row">
-            <div class="col-lg-4 col-12">
-              <div class="form-group mt-2">
-                <label class="form-label">Parking</label>
-                <input #parking="ngModel" [(ngModel)]="props.parking" type="text" class="form-control shadow-none"
-                  name="parking" id="parking" placeholder="Parking?" required />
-              </div>
+            <div class="col-lg-3 col-6">
+              <input type="checkbox" formControlName="hasParking" />
+              <label>Parking</label>
             </div>
-            <div class="col-lg-4 col-12">
-              <div class="form-group mt-2">
-                <label class="form-label">WiFi</label>
-                <input #wifi="ngModel" [(ngModel)]="props.wifi" type="text" class="form-control shadow-none" name="wifi"
-                  id="wifi" placeholder="WiFi?" required />
-              </div>
+            <div class="col-lg-3 col-6">
+              <input type="checkbox" formControlName="hasWifi" />
+              <label>WiFi</label>
             </div>
-            <div class="col-lg-4 col-12">
-              <div class="form-group mt-2">
-                <label class="form-label">Elevator</label>
-                <input #elevator="ngModel" [(ngModel)]="props.elevator" type="text" class="form-control shadow-none"
-                  name="elevator" id="elevator" placeholder="Elevator?" required />
-              </div>
+            <div class="col-lg-3 col-6">
+              <input type="checkbox" formControlName="hasElevator" />
+              <label>Elevator</label>
+            </div>
+            <div class="col-lg-3 col-6">
+              <input type="checkbox" formControlName="isFurnished" />
+              <label>Furnished</label>
             </div>
           </div>
-          <div class="form-group mt-2 ">
+
+          <div class="form-group mt-2">
             <label class="form-label">Property Description</label>
-            <textarea #description="ngModel" [(ngModel)]="props.description" class="form-control shadow-none"
-              id="description" name="description" cols="30" rows="5" placeholder="Description" required> </textarea>
+            <textarea class="form-control shadow-none" formControlName="description" rows="5" placeholder="Description"
+              required></textarea>
           </div>
+
           <div class="form-group mt-2 text-center">
-            <button (click)="add()" type="submit" class="btn-purble"
-              [disabled]="name.invalid || price.invalid || location.invalid || image1.invalid || image2.invalid || image3.invalid || type.invalid || bathNum.invalid || bedNum.invalid || area.invalid || description.invalid">Add
-              Property</button>
+            <button type="submit" class="btn-purble" [disabled]="propertyForm.invalid">Add Property</button>
           </div>
         </form>
       </div>
