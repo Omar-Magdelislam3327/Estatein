@@ -25,11 +25,11 @@
             <div class="input-group mb-3">
               <select class="form-select shadow-none" [(ngModel)]="selectedType" name="propertyType">
                 <option value="" selected disabled>Property Type</option>
-                <option value="Villa">Villa</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Condominium">Condominium</option>
-                <option value="Townhouse">Townhouse</option>
-                <option value="Penthouse">Penthouse</option>
+                <option value="House"> House</option>
+                <option value="Villa"> Villa</option>
+                <option value="Apartment"> Apartment</option>
+                <option value="Office"> Office</option>
+                <option value="Store"> Store</option>
               </select>
             </div>
           </div>
@@ -37,10 +37,11 @@
             <div class="input-group mb-3">
               <select class="form-select shadow-none" [(ngModel)]="selectedPriceRange" name="priceRange">
                 <option value="" selected disabled>Pricing Range</option>
-                <option value="800000-999000">800,000 - 999,000</option>
-                <option value="1000000-1199000">1,000,000 - 1,199,000</option>
-                <option value="1200000-1499000">1,200,000 - 1,499,000</option>
-                <option value="1500000-1405588112">1,500,000 - 2,000,000</option>
+                <option value="1000000-1499000">1,000,000 - 1,499,000</option>
+                <option value="1500000-1999000">1,500,000 - 1,999,000</option>
+                <option value="2000000-3000000">2,000,000 - 2,999,000</option>
+                <option value="3000000-3999000">3,000,000 - 3,999,000</option>
+                <option value="> 4000000"> > 4,000,000</option>
               </select>
             </div>
           </div>
@@ -48,19 +49,19 @@
             <div class="input-group mb-3">
               <select class="form-select shadow-none" [(ngModel)]="selectedSize" name="propertySize">
                 <option value="" selected disabled>Property Size</option>
-                <option value="90-100">90 - 100</option>
-                <option value="100-110">100 - 110</option>
-                <option value="110-120">110 - 120</option>
-                <option value="120-130">120 - 130</option>
-                <option value="130-140">130 - 140</option>
-                <option value="140-150">140 - 150</option>
+                <option value="100-150">100 - 150</option>
+                <option value="151-180">151 - 180</option>
+                <option value="181-200">181 - 200</option>
+                <option value="201-250">201 - 250</option>
+                <option value="251-300">251 - 300</option>
+                <option value="> 300"> > 300</option>
               </select>
             </div>
           </div>
           <div class="col-12">
             <div class="text-center mb-3 mt-3">
-              <button class="btn-purble col-2 mx-1" type="button" (click)="filterProperties()">Find Property</button>
-              <button class="btn-darker col-2 mx-1" type="button" (click)="clearFilter()">Reset</button>
+              <button class="btn-purble col-lg-2 mx-1" type="button" (click)="filterProperties()">Find Property</button>
+              <button class="btn-darker col-lg-2 mx-1" type="button" (click)="clearFilter()">Reset</button>
             </div>
           </div>
         </div>
@@ -82,23 +83,36 @@
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 mt-3"
           *ngFor="let prop of filteredProperties | paginate : { id: 'paginate', itemsPerPage: pageSize, currentPage: currentPage, totalItems: total }">
-          <div class="box p-3 m-auto">
+          <div class="box m-auto" routerLink="/properties/{{prop.id}}">
+            <div class="fav" (click)="toggleFav($event, prop.id)">
+              <i [class.fa-solid]="isFavorited(prop.id)" [class.fa-regular]="!isFavorited(prop.id)"
+                [ngClass]="{'text-danger': isFavorited(prop.id), 'text-white': !isFavorited(prop.id)}"
+                class="fs-3 fa-heart">
+              </i>
+            </div>
+
             <div class="head">
               <div class="img-wrapper text-center">
                 <img [src]="'http://mogarealstate.runasp.net' + prop?.headImage" class="d-block w-100" alt="...">
               </div>
             </div>
-            <h4 class="mt-2 text-white">{{prop.name}}</h4>
-            <div class="lower mt-4">
+            <div class="lower p-3 pt-0 mt-4">
+              <h4 class="mt-2 text-white">{{prop.name}}</h4>
+              <p class="text-white-50">{{prop.location}} , Egypt</p>
               <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <div class="price">
                   <p class="m-0 p-0">Price:</p>
                   <h5 class="text-white m-0 p-0">${{prop.price}}</h5>
                 </div>
-                <button routerLink="/properties/{{prop.id}}" class="btn-purble">View Property Details</button>
+                <div class="btns">
+                  <i class="fa-solid fa-phone fs-4 text-white mx-2" (click)="callPhone('+201551114499', $event)"></i>
+                  <i class="fa-brands fa-whatsapp fs-3 text-white mx-2"
+                    (click)="openWhatsApp('+201551114499', $event)"></i>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
         <div class="col-lg-12" *ngIf="showPagination">
           <div *ngIf="properties.length > 0"

@@ -8,6 +8,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-prop',
@@ -39,14 +40,19 @@ export class PropComponent implements OnInit {
   locations!: any[];
   //
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 12;
   total: number = 0;
   fixed = Math.ceil(this.total / this.pageSize);
   showPagination: boolean = false;
   isFiltering: boolean = false;
+  //
+  userId: any;
+  isFavorite: any[] = [];
   constructor(private api: PropertiesapiService) {
+    this.userId = localStorage.getItem('userId');
     this.getProperties();
     this.getLocations();
+    this.getFavs();
   }
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -60,10 +66,6 @@ export class PropComponent implements OnInit {
         this.fixed = Math.ceil(this.total / this.pageSize);
         this.showPagination = this.total > this.pageSize;
         this.isFiltering = false;
-        console.log('Total props:', this.total);
-        console.log('Pages needed:', this.fixed);
-        console.log('Show pagination:', this.showPagination);
-        console.log('props:', this.properties);
         this.filteredProperties = [...this.properties];
       },
       error: (err) => console.error(err),
@@ -82,29 +84,49 @@ export class PropComponent implements OnInit {
     this.filteredProperties = this.properties.filter((property) => {
       let propLocation = this.selectedLocation ? property.location === this.selectedLocation : true;
       let propType = this.selectedType ? property.type === this.selectedType : true;
+
       let propSize = true;
       if (this.selectedSize) {
-        const [min, max] = this.selectedSize.split('-').map(Number);
-        propSize = property.size >= min && property.size <= max;
+        console.log('Selected Size:', this.selectedSize);
+
+        if (this.selectedSize.includes('>')) {
+          const min = parseInt(this.selectedSize.replace('>', '').trim(), 10);
+          console.log('Property Size:', property.size, 'Selected Min:', min, 'Condition Met:', property.size > min);
+          propSize = property.size > min;
+        } else {
+          const [min, max] = this.selectedSize.split('-').map(Number);
+          propSize = property.size >= min && property.size <= max;
+        }
       }
+
       let propPrice = true;
       if (this.selectedPriceRange) {
-        const [min, max] = this.selectedPriceRange.split('-').map(Number);
-        propPrice = property.price >= min && property.price <= max;
+        console.log('Selected Price:', this.selectedPriceRange);
+
+        if (this.selectedPriceRange.includes('>')) {
+          const min = parseInt(this.selectedPriceRange.replace('>', '').trim(), 10);
+          console.log('Property Price:', property.price, 'Selected Min:', min, 'Condition Met:', property.price > min);
+          propPrice = property.price > min;
+        } else {
+          const [min, max] = this.selectedPriceRange.split('-').map(Number);
+          propPrice = property.price >= min && property.price <= max;
+        }
       }
-      this.isFiltering = true;
+
       return propType && propSize && propPrice && propLocation;
     });
+
     this.total = this.filteredProperties.length;
     this.fixed = Math.ceil(this.total / this.pageSize);
     this.showPagination = this.total > this.pageSize;
-    this.isFiltering = true;
 
     console.log('Filtered Properties:', this.filteredProperties);
     console.log('New Total:', this.total);
     console.log('Updated Pages Needed:', this.fixed);
     console.log('Show Pagination:', this.showPagination);
   }
+
+
   clearFilter() {
     this.selectedLocation = '';
     this.selectedType = '';
@@ -115,5 +137,84 @@ export class PropComponent implements OnInit {
   pageChanged(event: number): void {
     this.currentPage = event;
     this.isFiltering ? this.filterProperties() : this.getProperties();
+  }
+  getFavs() {
+    this.api.getFavs(this.userId).subscribe({
+      next: (data: any) => {
+        this.isFavorite = data;
+        console.log('Favorites:', data);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  isFavorited(id: number): boolean {
+    return this.isFavorite.some((prop: any) => prop.id === id);
+  }
+
+  favProp(id: number) {
+    this.api.addPropertyToFavorites(this.userId, id).subscribe({
+      next: () => {
+        this.getFavs();
+        console.log(`Added property ${id} to favorites`);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  deleteFav(id: number) {
+    this.api.removeFav(this.userId, id).subscribe({
+      next: () => {
+        this.getFavs();
+        console.log(`Removed property ${id} from favorites`);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  toggleFav(event: Event, id: number) {
+    event.stopPropagation();
+
+    if (this.isFavorited(id)) {
+      if (!this.isUserLoggedIn()) {
+        this.showLoginAlert();
+        return;
+      }
+      this.deleteFav(id);
+    } else {
+      if (!this.isUserLoggedIn()) {
+        this.showLoginAlert();
+        return;
+      }
+      this.favProp(id);
+    }
+  }
+  isUserLoggedIn(): boolean {
+    const user = localStorage.getItem('userId');
+    return user !== null;
+  }
+  showLoginAlert() {
+    Swal.fire({
+      title: 'Login Required',
+      text: 'You need to log in to perform this action.',
+      icon: 'warning',
+      background: '#1e1e1e',
+      color: 'white',
+      confirmButtonColor: '#A70A9A',
+      confirmButtonText: 'Login',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/login';
+      }
+    });
+  }
+  callPhone(phone: string, event: Event) {
+    event.stopPropagation();
+    window.location.href = `tel:${phone}`;
+  }
+
+  openWhatsApp(phone: string, event: Event) {
+    event.stopPropagation();
+    window.open(`https://wa.me/${phone}`, '_blank');
   }
 }

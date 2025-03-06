@@ -36,7 +36,7 @@ export class SignupComponent implements OnDestroy {
       this.subscription = this.api.post(userData).subscribe(
         (response: any) => {
           console.log(response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
         },
         (error) => {
           console.error(error);

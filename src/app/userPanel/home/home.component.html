@@ -94,26 +94,38 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 mt-3" *ngFor="let prop of prop let i = index">
-          <div class="box p-3 m-auto" *ngIf="i<3">
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-3" *ngFor="let prop of prop">
+          <div class="box m-auto" routerLink="/properties/{{prop.id}}">
+            <div class="fav" (click)="toggleFav($event, prop.id)">
+              <i [class.fa-solid]="isFavorited(prop.id)" [class.fa-regular]="!isFavorited(prop.id)"
+                [ngClass]="{'text-danger': isFavorited(prop.id), 'text-white': !isFavorited(prop.id)}"
+                class="fs-3 fa-heart">
+              </i>
+            </div>
+
             <div class="head">
               <div class="img-wrapper text-center">
-                <img [src]="'http://mogarealstate.runasp.net' + prop.headImage" class="img-fluid" alt="">
+                <img [src]="'http://mogarealstate.runasp.net' + prop?.headImage" class="d-block w-100" alt="...">
               </div>
             </div>
-            <h4 class="mt-2 text-white">{{prop.name}}</h4>
-            <div class="lower mt-4">
+            <div class="lower p-3 pt-0 mt-4">
+              <h4 class="mt-2 text-white">{{prop.name}}</h4>
+              <p class="text-white-50">{{prop.location}} , Egypt</p>
               <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <div class="price">
                   <p class="m-0 p-0">Price:</p>
                   <h5 class="text-white m-0 p-0">${{prop.price}}</h5>
                 </div>
-                <button routerLink="/properties/{{prop.id}}" class="btn-purble">View Property Details</button>
+                <div class="btns-call">
+                  <i class="fa-solid fa-phone fs-4 text-white mx-2" (click)="callPhone('+201551114499', $event)"></i>
+                  <i class="fa-brands fa-whatsapp fs-3 text-white mx-2"
+                    (click)="openWhatsApp('+201551114499', $event)"></i>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </section>

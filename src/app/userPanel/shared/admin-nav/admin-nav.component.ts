@@ -9,8 +9,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './admin-nav.component.css'
 })
 export class AdminNavComponent {
-  constructor() {}
-  logout(){
-    localStorage.removeItem("admin")
+  constructor() { }
+  logout() {
+    localStorage.clear();
   }
 }

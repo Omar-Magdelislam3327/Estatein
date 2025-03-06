@@ -42,11 +42,14 @@
                     <p> This handy feature is perfect for organizing and refining choices, making
                       sure that the most appealing properties are always at the fingertips.</p>
                   </div>
+                  <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
+
                   <div class="row mt-5" *ngIf="favoriteProperties?.length > 0">
                     <div class="col-lg-4 col-md-6 col-12" *ngFor="let property of favoriteProperties">
                       <div class="card">
-                        <div class="delete">
-                          <button class="btn btn-danger" (click)="deleteFavorite(property.id)">Delete</button>
+
+                        <div class="fav" (click)="deleteFavorite(property.id)">
+                          <i class="fa-solid fa-heart fs-5 text-danger"></i>
                         </div>
                         <a class="text-reset text-decoration-none" routerLink="/properties/{{property.id}}">
                           <img [src]="'http://mogarealstate.runasp.net' + property?.headImage" class="card-img-top"

@@ -8,6 +8,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { UsersapiService } from '../../services/usersapi.service';
 import { MessageService } from 'primeng/api';
+import Swal from 'sweetalert2'
+import { ToastModule } from 'primeng/toast';
 
 
 @Component({
@@ -17,7 +19,8 @@ import { MessageService } from 'primeng/api';
     FooterComponent,
     FormsModule,
     RouterLink,
-    CommonModule
+    CommonModule,
+    ToastModule
   ],
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -72,12 +75,28 @@ export class ProfileComponent implements OnInit {
     })
   }
   deleteFavorite(propertyId: number): void {
-    this.propAPI.removeFav(this.userId, propertyId).subscribe({
-      next: (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deleted from favorites' });
-        this.loadFavoriteProperties();
-      }, error: (err: any) => {
-        console.log(err);
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      background: '#1e1e1e',
+      color: 'white',
+      confirmButtonColor: 'red',
+      cancelButtonColor: "#A70A9A",
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.propAPI.removeFav(this.userId, propertyId).subscribe({
+          next: (data: any) => {
+            this.loadFavoriteProperties();
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Property deleted from favorites' });
+          }, error: (err: any) => {
+            console.log(err);
+          }
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Property kept in favorites' });
       }
     })
   }

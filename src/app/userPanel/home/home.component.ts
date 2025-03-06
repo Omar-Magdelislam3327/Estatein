@@ -3,10 +3,11 @@ import { NavComponent } from '../shared/nav/nav.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { Router } from '@angular/router';
 import { PropertiesapiService } from '../../services/propertiesapi.service';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { SlicePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +15,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   imports: [
     NavComponent,
     FooterComponent,
-    NgFor,
-    NgIf,
-    SlicePipe,
+    CommonModule,
     RouterLink,
   ],
   templateUrl: './home.component.html',
@@ -35,13 +34,97 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 })
 export class HomeComponent {
   prop!: any
+  //
+  isFavorite: any[] = [];
+  userId: any;
   constructor(private router: Router, private api: PropertiesapiService) {
+    this.userId = localStorage.getItem('userId');
+    this.getFavs();
     this.api.getProperties().subscribe((data: any) => {
-      this.prop = data
+      this.prop = data.data.slice(0, 3);
     })
   }
   ngOnInit() {
     window.scrollTo(0, 0);
+  }
+  getFavs() {
+    this.api.getFavs(this.userId).subscribe({
+      next: (data: any) => {
+        this.isFavorite = data;
+        console.log('Favorites:', data);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  isFavorited(id: number): boolean {
+    return this.isFavorite.some((prop: any) => prop.id === id);
+  }
+
+  favProp(id: number) {
+    this.api.addPropertyToFavorites(this.userId, id).subscribe({
+      next: () => {
+        this.getFavs();
+        console.log(`Added property ${id} to favorites`);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  deleteFav(id: number) {
+    this.api.removeFav(this.userId, id).subscribe({
+      next: () => {
+        this.getFavs();
+        console.log(`Removed property ${id} from favorites`);
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  toggleFav(event: Event, id: number) {
+    event.stopPropagation();
+
+    if (this.isFavorited(id)) {
+      if (!this.isUserLoggedIn()) {
+        this.showLoginAlert();
+        return;
+      }
+      this.deleteFav(id);
+    } else {
+      if (!this.isUserLoggedIn()) {
+        this.showLoginAlert();
+        return;
+      }
+      this.favProp(id);
+    }
+  }
+  isUserLoggedIn(): boolean {
+    const user = localStorage.getItem('userId');
+    return user !== null;
+  }
+  showLoginAlert() {
+    Swal.fire({
+      title: 'Login Required',
+      text: 'You need to log in to perform this action.',
+      icon: 'warning',
+      background: '#1e1e1e',
+      color: 'white',
+      confirmButtonColor: '#A70A9A',
+      confirmButtonText: 'Login',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = '/login';
+      }
+    });
+  }
+  callPhone(phone: string, event: Event) {
+    event.stopPropagation();
+    window.location.href = `tel:${phone}`;
+  }
+
+  openWhatsApp(phone: string, event: Event) {
+    event.stopPropagation();
+    window.open(`https://wa.me/${phone}`, '_blank');
   }
 
 }

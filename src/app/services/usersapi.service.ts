@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersapiService {
-  private baseUrl = 'https://mogarealstate.runasp.net/api';
+  private baseUrl = 'https://mogarealstate.runasp.net';
   constructor(private http: HttpClient) { }
   post(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/Auth/Register`, user);
   }
+
   getUserData(userId: any) {
-    return this.http.get<any>(`${this.baseUrl}/Users/UserData/${userId}`);
+    return this.http.get<any>(`${this.baseUrl}/api/Users/UserData/${userId}`);
   }
 }

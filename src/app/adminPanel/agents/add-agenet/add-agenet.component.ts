@@ -58,12 +58,12 @@ export class AddAgenetComponent {
     formData.append('Name', this.agentForm.get('Name')?.value);
     formData.append('Email', this.agentForm.get('Email')?.value);
     formData.append('Phone', this.agentForm.get('Phone')?.value);
-    formData.append('password', this.agentForm.get('password')?.value);
+    formData.append('Password', this.agentForm.get('Password')?.value);
     console.log(formData);
     this.api.addAgent(formData).subscribe({
       next: (res: any) => {
         console.log('Agent added successfully', res);
-        this.router.navigateByUrl('/admin/agents/list');
+        this.router.navigateByUrl('/agents/list');
       },
       error: (error: any) => {
         console.error('Error adding agent', error);
